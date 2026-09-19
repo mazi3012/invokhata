@@ -1,23 +1,26 @@
 # InvoKhata — Session Notes / Current State
 
 > Purpose: a "glimpse" doc for resuming work. Read this + ARCHITECTURE.md before touching code.
-> Last updated: Sept 11, 2026.
+> Last updated: Sept 20, 2026.
 
 ## Current milestone (in flight)
 
-**Goal:** Customer editing, dues recording, and GSTIN-based auto-state selection in the Khata
-module, with **automatic IGST selection in POS for inter-state customers**.
+**Goal:** Clean up and stabilize the application UI and infrastructure, specifically addressing desktop experience, uninitialized repositories, and core navigation capabilities.
 
 ### ✅ Done
 | Item | Where |
 |---|---|
+| **Invoice Preview Optimization (Desktop)** | `lib/core/utils/pdf_preview_screen.dart` |
+| Restricted PDF preview actions to Download, Share, and Print. Disabled unnecessary format edits | `pdf_preview_screen.dart` |
+| Replaced silent hardcoded PDF download path with desktop-appropriate `FilePicker.platform.saveFile` (save-as dialog) | `pdf_preview_screen.dart` |
+| Added missing UI back-button to PDF Preview header by configuring `AppHeader(showBackButton: true)` | `pdf_preview_screen.dart` |
 | `updateParty`, `recordDues`, `addPayment` in khata provider | `lib/features/khata/presentation/providers/party_provider.dart` |
 | `AddPartyScreen` supports **Add + Edit** modes via `partyToEdit` param | `lib/features/khata/presentation/screens/add_party_screen.dart` |
 | `PartyDetailScreen` has **Edit / Record Dues / Record Payment** dialogs; balance updates live via `ref.watch(partyProvider)` | `lib/features/khata/presentation/screens/party_detail_screen.dart` |
 | Fixed pre-existing `const` error in `add_party_screen.dart` | `add_party_screen.dart` |
 | Fixed `isar_flutter_libs` AGP 8 namespace error in plugin's `build.gradle` | `~/.pub-cache/.../isar_flutter_libs-3.1.0+1/android/build.gradle` |
 | Optimized `gradle.properties` for 8 GB RAM (capped JVM to 2G heap) | `android/gradle.properties` |
-| Built debug APK, installed on Vivo phone via adb | package `com.invokhata.invokhata` |
+| Initialized Git repository and pushed to GitHub | `https://github.com/mazi3012/invokhata.git` |
 
 ### 🧪 In progress / Blocked
 - **None.** (POS IGST inter-state behavior is implemented but **not yet runtime-validated** — see Next.)
@@ -28,12 +31,13 @@ module, with **automatic IGST selection in POS for inter-state customers**.
   in git; it breaks again on package upgrade/cache wipe.
 - ADB permission issue was resolved by the user allowing USB debugging from the phone prompt.
 - Test device: **Vivo V2312 (serial 10BD8S3BRP0007Y)**.
+- **Git Context:** The project is now tracked via Git (`https://github.com/mazi3012/invokhata.git`). Changes are pushed to the `master` branch.
 
 ## What a fresh session should do first
 1. Read `docs/TROUBLESHOOTING.md` (esp. §1 RAM, §2 pub-cache namespace, §3 adb).
-2. `flutter pub get` + (only if schemas changed) `dart run build_runner build --delete-conflicting-outputs`.
-3. Build is **slow (~9 min)** — start it early or test hot-reload via `flutter run`.
-4. Check `git status` / diff to see what's staged vs new.
+2. Check `git pull` status to ensure you are synced with the remote repository.
+3. `flutter pub get` + (only if schemas changed) `dart run build_runner build --delete-conflicting-outputs`.
+4. Build is **slow (~9 min)** — start it early or test hot-reload via `flutter run`.
 
 ## Next steps (prioritized)
 1. **User testing of the installed app** on the phone:
