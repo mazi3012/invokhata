@@ -32,8 +32,7 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
   double get _totalCgst => _lineItems.fold(0, (sum, i) => sum + i.cgstAmount);
   double get _totalSgst => _lineItems.fold(0, (sum, i) => sum + i.sgstAmount);
   double get _totalIgst => _lineItems.fold(0, (sum, i) => sum + i.igstAmount);
-  double get _totalGst =>
-      _lineItems.fold(0, (sum, i) => sum + i.taxAmount);
+  double get _totalGst => _lineItems.fold(0, (sum, i) => sum + i.taxAmount);
 
   @override
   void initState() {
@@ -83,8 +82,8 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: AppColors.primary,
-            ),
+                  primary: AppColors.primary,
+                ),
           ),
           child: child!,
         );
@@ -187,41 +186,40 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppHeader(title: 'Purchase', showBackButton: true),
-      body: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 800),
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Gradient Header Card
-                      _buildHeaderCard(),
-                      const SizedBox(height: 16),
-                      
-                      // Form Card
-                      _buildFormCard(),
-                      
-                      const SizedBox(height: 20),
-                      
-                      // Total Amount Banner (visible when items exist)
-                      if (_lineItems.isNotEmpty) ...[
-                        _buildTotalBanner(),
-                        const SizedBox(height: 20),
-                      ],
-                      
-                      // Action Buttons
-                      _buildActionBar(),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isNarrow = constraints.maxWidth < 520;
+          final horizontalPadding = isNarrow ? 12.0 : 24.0;
+          final contentWidth = isNarrow ? double.infinity : 840.0;
+
+          return Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: contentWidth),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.fromLTRB(
+                  horizontalPadding,
+                  isNarrow ? 12 : 20,
+                  horizontalPadding,
+                  24,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildHeaderCard(compact: isNarrow),
+                    SizedBox(height: isNarrow ? 12 : 16),
+                    _buildFormCard(compact: isNarrow),
+                    SizedBox(height: isNarrow ? 14 : 20),
+                    if (_lineItems.isNotEmpty) ...[
+                      _buildTotalBanner(compact: isNarrow),
+                      SizedBox(height: isNarrow ? 14 : 20),
                     ],
-                  ),
+                    _buildActionBar(compact: isNarrow),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -230,10 +228,10 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
   // HEADER CARD
   // ──────────────────────────────────────────────────────────
 
-  Widget _buildHeaderCard() {
+  Widget _buildHeaderCard({bool compact = false}) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(compact ? 14 : 16),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [AppColors.primary, AppColors.primaryDark],
@@ -252,7 +250,7 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(compact ? 7 : 8),
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(8),
@@ -265,11 +263,11 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'New Purchase',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: compact ? 16 : 18,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -294,9 +292,9 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
   // FORM CARD
   // ──────────────────────────────────────────────────────────
 
-  Widget _buildFormCard() {
+  Widget _buildFormCard({bool compact = false}) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(compact ? 14 : 16),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
@@ -317,14 +315,23 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
           const SizedBox(height: 14),
 
           // Bill No + Date
-          Row(
-            children: [
-              Expanded(child: _buildBillNoField()),
-              const SizedBox(width: 12),
-              Expanded(child: _buildDateField()),
-            ],
-          ),
-          const SizedBox(height: 16),
+          if (compact)
+            Column(
+              children: [
+                _buildBillNoField(),
+                const SizedBox(height: 12),
+                _buildDateField(),
+              ],
+            )
+          else
+            Row(
+              children: [
+                Expanded(child: _buildBillNoField()),
+                const SizedBox(width: 12),
+                Expanded(child: _buildDateField()),
+              ],
+            ),
+          SizedBox(height: compact ? 14 : 16),
 
           // Party Name
           _buildFieldLabel('Party Name *'),
@@ -334,7 +341,7 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
             decoration: _inputDecoration('Enter party name'),
             textCapitalization: TextCapitalization.words,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: compact ? 14 : 16),
 
           // Phone Number
           _buildFieldLabel('Phone Number'),
@@ -349,7 +356,7 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
             ],
           ),
 
-          const Divider(height: 32, color: AppColors.divider),
+          Divider(height: compact ? 26 : 32, color: AppColors.divider),
 
           // Items Section
           _buildSectionTitle('Items'),
@@ -372,10 +379,13 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
   // TOTAL AMOUNT BANNER
   // ──────────────────────────────────────────────────────────
 
-  Widget _buildTotalBanner() {
+  Widget _buildTotalBanner({bool compact = false}) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: compact ? 16 : 20,
+        vertical: compact ? 14 : 16,
+      ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -407,9 +417,9 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
               const SizedBox(height: 4),
               Text(
                 '\u20b9${_totalAmount.toStringAsFixed(2)}',
-                style: const TextStyle(
+                style: TextStyle(
                   color: AppColors.primary,
-                  fontSize: 28,
+                  fontSize: compact ? 24 : 28,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -417,8 +427,10 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
                 const SizedBox(height: 2),
                 Text(
                   [
-                    if (_totalGst > 0) 'GST: \u20b9${_totalGst.toStringAsFixed(2)}',
-                    if (_totalDiscount > 0) 'Discount: -\u20b9${_totalDiscount.toStringAsFixed(2)}',
+                    if (_totalGst > 0)
+                      'GST: \u20b9${_totalGst.toStringAsFixed(2)}',
+                    if (_totalDiscount > 0)
+                      'Discount: -\u20b9${_totalDiscount.toStringAsFixed(2)}',
                   ].join('  |  '),
                   style: const TextStyle(
                     color: AppColors.textSecondary,
@@ -463,9 +475,9 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
   // ACTION BAR
   // ──────────────────────────────────────────────────────────
 
-  Widget _buildActionBar() {
+  Widget _buildActionBar({bool compact = false}) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(compact ? 8 : 12),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
@@ -826,19 +838,18 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
           _summaryRow('IGST', '\u20b9${_totalIgst.toStringAsFixed(2)}'),
 
         // Total GST (only when IGST + CGST/SGST are mixed in the bill)
-        if (_totalGst > 0 && _totalCgst > 0 && _totalIgst > 0)
-          ...[
-            const SizedBox(height: 4),
-            _summaryRow(
-              'Total GST',
-              '\u20b9${_totalGst.toStringAsFixed(2)}',
-              valueStyle: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: AppColors.textPrimary,
-              ),
+        if (_totalGst > 0 && _totalCgst > 0 && _totalIgst > 0) ...[
+          const SizedBox(height: 4),
+          _summaryRow(
+            'Total GST',
+            '\u20b9${_totalGst.toStringAsFixed(2)}',
+            valueStyle: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: AppColors.textPrimary,
             ),
-          ],
+          ),
+        ],
 
         // Grand total divider
         Container(
@@ -872,7 +883,8 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
     );
   }
 
-  Widget _summaryRow(String label, String value, {Color? valueColor, TextStyle? valueStyle}) {
+  Widget _summaryRow(String label, String value,
+      {Color? valueColor, TextStyle? valueStyle}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: Row(

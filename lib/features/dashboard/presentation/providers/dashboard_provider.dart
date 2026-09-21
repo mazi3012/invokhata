@@ -51,7 +51,11 @@ class AnalyticsRepository {
     };
   }
 
-  /// Returns daily sales grouped by day for the last 14 days (or fewer if no data).
+  /// Returns daily sales grouped by day for the last 14 days.
+  ///
+  /// An empty map is returned when there are no positive sales in the period so
+  /// the dashboard can render an intentional no-data state instead of trying
+  /// to plot a flat zero-value line.
   /// Format: `{'2026-09-01': 1234.5, ...}` with keys sorted ascending.
   Future<Map<String, double>> getSalesOverTime({int days = 14}) async {
     final invoices = await _isar.invoices.where().findAll();
@@ -66,13 +70,17 @@ class AnalyticsRepository {
       daily[_formatDate(day)] = 0.0;
     }
 
+    var hasSales = false;
     for (final inv in invoices) {
       if (inv.invoiceDate.isBefore(cutoff)) continue;
       final key = _formatDate(inv.invoiceDate);
-      if (daily.containsKey(key)) {
+      if (daily.containsKey(key) && inv.grandTotal > 0) {
         daily[key] = (daily[key] ?? 0) + inv.grandTotal;
+        hasSales = true;
       }
     }
+
+    if (!hasSales) return {};
 
     final sorted = Map<String, double>.fromEntries(
       daily.entries.toList()..sort((a, b) => a.key.compareTo(b.key)),

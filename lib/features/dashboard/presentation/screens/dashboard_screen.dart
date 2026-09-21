@@ -7,10 +7,6 @@ import '../../../inventory/presentation/providers/inventory_provider.dart';
 import '../../../khata/presentation/providers/party_provider.dart';
 import '../../../../core/services/settings_service.dart';
 import '../providers/dashboard_provider.dart';
-import '../../../pos/presentation/screens/pos_screen.dart';
-import '../../../khata/presentation/screens/add_party_screen.dart';
-import '../../../inventory/presentation/screens/add_item_screen.dart';
-import '../../../purchase/presentation/screens/purchase_screen.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -55,160 +51,6 @@ class DashboardScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Quick Action Banner
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [AppColors.primary, AppColors.primaryDark],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.primary.withValues(alpha: 0.22),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Quick Actions',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 0.2,
-                                ),
-                              ),
-                              SizedBox(height: 2),
-                              Text(
-                                'Create billing, purchase, party & inventory',
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 11.5,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Icon(
-                            Icons.bolt_rounded,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      LayoutBuilder(
-                        builder: (context, constraints) {
-                          final isWide = constraints.maxWidth > 600;
-                          final crossCount = isWide ? 4 : 2;
-                          const buttonGap = 8.0;
-
-                          final buttons = [
-                            _QuickActionButton(
-                              icon: Icons.point_of_sale_rounded,
-                              label: 'POS Billing',
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => const POSScreen()),
-                                );
-                              },
-                            ),
-                            _QuickActionButton(
-                              icon: Icons.shopping_cart_rounded,
-                              label: 'New Purchase',
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => const PurchaseScreen()),
-                                );
-                              },
-                            ),
-                            _QuickActionButton(
-                              icon: Icons.person_add_alt_1_rounded,
-                              label: '+ Customer',
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => const AddPartyScreen()),
-                                );
-                              },
-                            ),
-                            _QuickActionButton(
-                              icon: Icons.add_box_rounded,
-                              label: '+ Product',
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => const AddItemScreen()),
-                                );
-                              },
-                            ),
-                          ];
-
-                          // Build responsive rows (2 per row on phone, 4 per row on wide)
-                          final rows = <Widget>[];
-                          for (var i = 0;
-                              i < buttons.length;
-                              i += crossCount) {
-                            final rowButtons = buttons.sublist(
-                                i,
-                                (i + crossCount) > buttons.length
-                                    ? buttons.length
-                                    : i + crossCount);
-                            rows.add(Row(
-                              children: [
-                                for (var j = 0; j < rowButtons.length; j++) ...[
-                                  Expanded(child: rowButtons[j]),
-                                  if (j != rowButtons.length - 1)
-                                    const SizedBox(width: buttonGap),
-                                ],
-                                if (rowButtons.length < crossCount) ...[
-                                  for (var k = rowButtons.length;
-                                      k < crossCount;
-                                      k++) ...[
-                                    const Expanded(child: SizedBox()),
-                                    if (k != crossCount - 1)
-                                      const SizedBox(width: buttonGap),
-                                  ],
-                                ],
-                              ],
-                            ));
-                          }
-
-                          return Column(
-                            children: [
-                              for (var i = 0; i < rows.length; i++) ...[
-                                rows[i],
-                                if (i != rows.length - 1)
-                                  const SizedBox(height: buttonGap),
-                              ],
-                            ],
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-
                 // Analytics Summary Grid
                 const Text(
                   'Analytics & Financial Summary',
@@ -320,40 +162,81 @@ class DashboardScreen extends ConsumerWidget {
 
                 // Charts Section
                 const Text(
-                  'Sales Trends & Product Performance',
+                  'Sales & product insights',
                   style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryDark),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryDark,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'A quick view of your recent revenue and best-performing products.',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.textSecondary,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 LayoutBuilder(
                   builder: (context, constraints) {
                     final isDesktop = constraints.maxWidth > 800;
 
-                    final lineChart = SizedBox(
-                      height: 280,
-                      child: salesOverTimeAsync.when(
-                        data: (data) => data.isEmpty
-                            ? _buildEmptyChart('No sales data yet')
-                            : SalesLineChart(salesData: data),
-                        loading: () =>
-                            const Center(child: CircularProgressIndicator()),
-                        error: (e, _) =>
-                            Center(child: Text('Error loading chart: $e')),
+                    final lineChart = _buildChartCard(
+                      title: 'Sales trend',
+                      subtitle: 'Revenue over the last 14 days',
+                      icon: Icons.show_chart_rounded,
+                      color: AppColors.primary,
+                      child: SizedBox(
+                        height: 250,
+                        child: salesOverTimeAsync.when(
+                          data: (data) => data.isEmpty
+                              ? _buildEmptyChart(
+                                  icon: Icons.auto_graph_rounded,
+                                  title: 'No sales data yet',
+                                  message:
+                                      'Record an invoice to start seeing your daily trend.',
+                                )
+                              : SalesLineChart(
+                                  salesData: data,
+                                  currencySymbol: cur,
+                                ),
+                          loading: () => _buildChartLoading(),
+                          error: (_, __) => _buildEmptyChart(
+                            icon: Icons.cloud_off_rounded,
+                            title: 'Sales trend unavailable',
+                            message: 'We could not load the latest sales data.',
+                          ),
+                        ),
                       ),
                     );
 
-                    final pieChart = SizedBox(
-                      height: 280,
-                      child: topProductsAsync.when(
-                        data: (data) => data.isEmpty
-                            ? _buildEmptyChart('No product data yet')
-                            : ProductPieChart(productsData: data),
-                        loading: () =>
-                            const Center(child: CircularProgressIndicator()),
-                        error: (e, _) =>
-                            Center(child: Text('Error loading chart: $e')),
+                    final pieChart = _buildChartCard(
+                      title: 'Top products',
+                      subtitle: 'Revenue contribution by product',
+                      icon: Icons.donut_large_rounded,
+                      color: AppColors.accent,
+                      child: SizedBox(
+                        height: 250,
+                        child: topProductsAsync.when(
+                          data: (data) => data.isEmpty
+                              ? _buildEmptyChart(
+                                  icon: Icons.inventory_2_outlined,
+                                  title: 'No product data yet',
+                                  message:
+                                      'Complete a sale to see product performance here.',
+                                )
+                              : ProductPieChart(
+                                  productsData: data,
+                                  currencySymbol: cur,
+                                ),
+                          loading: () => _buildChartLoading(),
+                          error: (_, __) => _buildEmptyChart(
+                            icon: Icons.cloud_off_rounded,
+                            title: 'Product insights unavailable',
+                            message: 'We could not load product performance.',
+                          ),
+                        ),
                       ),
                     );
 
@@ -363,47 +246,23 @@ class DashboardScreen extends ConsumerWidget {
                         children: [
                           Expanded(
                             flex: 3,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.surface,
-                                borderRadius: BorderRadius.circular(14),
-                                border: Border.all(color: AppColors.border),
-                              ),
-                              padding: const EdgeInsets.all(16),
-                              child: lineChart,
-                            ),
+                            child: lineChart,
                           ),
                           const SizedBox(width: 16),
                           Expanded(
                             flex: 2,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.surface,
-                                borderRadius: BorderRadius.circular(14),
-                                border: Border.all(color: AppColors.border),
-                              ),
-                              padding: const EdgeInsets.all(16),
-                              child: pieChart,
-                            ),
+                            child: pieChart,
                           ),
                         ],
                       );
                     }
 
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.surface,
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: AppColors.border),
-                      ),
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          lineChart,
-                          const SizedBox(height: 24),
-                          pieChart,
-                        ],
-                      ),
+                    return Column(
+                      children: [
+                        lineChart,
+                        const SizedBox(height: 16),
+                        pieChart,
+                      ],
                     );
                   },
                 ),
@@ -461,7 +320,8 @@ class DashboardScreen extends ConsumerWidget {
                         final isZero = item.stockQuantity <= 0;
 
                         return Card(
-                          margin: EdgeInsets.only(bottom: constraints.maxWidth > 800 ? 0 : 8),
+                          margin: EdgeInsets.only(
+                              bottom: constraints.maxWidth > 800 ? 0 : 8),
                           child: Center(
                             child: ListTile(
                               leading: CircleAvatar(
@@ -472,23 +332,25 @@ class DashboardScreen extends ConsumerWidget {
                                   isZero
                                       ? Icons.error_outline
                                       : Icons.warning_amber,
-                                  color:
-                                      isZero ? AppColors.danger : AppColors.warning,
+                                  color: isZero
+                                      ? AppColors.danger
+                                      : AppColors.warning,
                                 ),
                               ),
                               title: Text(item.name,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style:
-                                      const TextStyle(fontWeight: FontWeight.bold)),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
                               subtitle: Text(
                                   'Price: $cur${item.salesPrice.toStringAsFixed(2)}'),
                               trailing: Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color:
-                                      isZero ? AppColors.danger : AppColors.warning,
+                                  color: isZero
+                                      ? AppColors.danger
+                                      : AppColors.warning,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
@@ -510,7 +372,8 @@ class DashboardScreen extends ConsumerWidget {
                         return GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                          gridDelegate:
+                              const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 500,
                             crossAxisSpacing: 16,
                             mainAxisSpacing: 16,
@@ -590,11 +453,116 @@ class DashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildEmptyChart(String message) {
+  Widget _buildChartCard({
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+    required Widget child,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: AppColors.border),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primaryDark.withValues(alpha: 0.04),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.fromLTRB(18, 16, 18, 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(9),
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.11),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: color, size: 19),
+              ),
+              const SizedBox(width: 11),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          child,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildChartLoading() {
+    return const Center(
+      child: SizedBox(
+        width: 24,
+        height: 24,
+        child: CircularProgressIndicator(strokeWidth: 2.5),
+      ),
+    );
+  }
+
+  Widget _buildEmptyChart({
+    required IconData icon,
+    required String title,
+    required String message,
+  }) {
     return Center(
-      child: Text(
-        message,
-        style: const TextStyle(color: AppColors.textHint),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 22),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 34, color: AppColors.primaryLight),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 12,
+                height: 1.35,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -603,8 +571,13 @@ class DashboardScreen extends ConsumerWidget {
 // Sales Line Chart Widget
 class SalesLineChart extends StatelessWidget {
   final Map<String, double> salesData;
+  final String currencySymbol;
 
-  const SalesLineChart({required this.salesData, super.key});
+  const SalesLineChart({
+    required this.salesData,
+    required this.currencySymbol,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -620,11 +593,13 @@ class SalesLineChart extends StatelessWidget {
       index++;
     });
 
-    final double maxY = spots.map((e) => e.y).reduce((a, b) => a > b ? a : b);
-    final double minY = spots.map((e) => e.y).reduce((a, b) => a < b ? a : b);
-    final double padding = (maxY - minY) * 0.1;
-    final double topY = maxY + padding;
-    final double bottomY = (minY - padding).clamp(0.0, double.infinity);
+    final double maxValue =
+        spots.map((e) => e.y).reduce((a, b) => a > b ? a : b);
+    final double chartMax = maxValue <= 0 ? 1 : maxValue;
+    final double topY = chartMax * 1.15;
+    const double bottomY = 0;
+    const double yAxisSteps = 4.0;
+    final double yInterval = topY / yAxisSteps;
 
     return AspectRatio(
       aspectRatio: 1.7,
@@ -635,7 +610,7 @@ class SalesLineChart extends StatelessWidget {
             gridData: FlGridData(
               show: true,
               drawVerticalLine: true,
-              horizontalInterval: (topY - bottomY) / 5,
+              horizontalInterval: yInterval,
               verticalInterval: 1,
               getDrawingHorizontalLine: (value) {
                 return FlLine(
@@ -670,7 +645,7 @@ class SalesLineChart extends StatelessWidget {
                         return SideTitleWidget(
                           meta: meta,
                           child: Text(
-                            '${parts[1]}-${parts[2]}',
+                            '${parts[1]}/${parts[2]}',
                             style: const TextStyle(
                               color: AppColors.textHint,
                               fontSize: 10,
@@ -689,12 +664,12 @@ class SalesLineChart extends StatelessWidget {
                 sideTitles: SideTitles(
                   showTitles: true,
                   reservedSize: 40,
-                  interval: (topY - bottomY) / 5,
+                  interval: yInterval,
                   getTitlesWidget: (value, meta) {
                     return SideTitleWidget(
                       meta: meta,
                       child: Text(
-                        '₹${value.toInt()}',
+                        '$currencySymbol${value.toInt()}',
                         style: const TextStyle(
                           color: AppColors.textHint,
                           fontSize: 10,
@@ -717,16 +692,63 @@ class SalesLineChart extends StatelessWidget {
               LineChartBarData(
                 spots: spots,
                 isCurved: true,
-                color: AppColors.primary,
-                barWidth: 3,
+                preventCurveOverShooting: true,
+                gradient: const LinearGradient(
+                  colors: [AppColors.primary, AppColors.info],
+                ),
+                barWidth: 3.5,
                 isStrokeCapRound: true,
-                dotData: const FlDotData(show: false),
+                dotData: FlDotData(
+                  show: true,
+                  getDotPainter: (spot, percent, bar, index) =>
+                      FlDotCirclePainter(
+                    radius: 3.5,
+                    color: AppColors.surface,
+                    strokeWidth: 2,
+                    strokeColor: AppColors.primary,
+                  ),
+                ),
                 belowBarData: BarAreaData(
                   show: true,
-                  color: AppColors.primary.withValues(alpha: 0.1),
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.primary.withValues(alpha: 0.22),
+                      AppColors.primary.withValues(alpha: 0.01),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
               ),
             ],
+            lineTouchData: LineTouchData(
+              touchTooltipData: LineTouchTooltipData(
+                getTooltipColor: (_) => AppColors.textPrimary,
+                tooltipBorderRadius: BorderRadius.circular(10),
+                fitInsideHorizontally: true,
+                fitInsideVertically: true,
+                getTooltipItems: (touchedSpots) {
+                  return touchedSpots.map((spot) {
+                    final dateIndex = spot.x.round();
+                    final date = dateIndex >= 0 && dateIndex < labels.length
+                        ? labels[dateIndex]
+                        : '';
+                    final parts = date.split('-');
+                    final formattedDate = parts.length == 3
+                        ? '${parts[2]}/${parts[1]}/${parts[0]}'
+                        : date;
+                    return LineTooltipItem(
+                      '$formattedDate\n$currencySymbol${spot.y.toStringAsFixed(2)}',
+                      const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12,
+                      ),
+                    );
+                  }).toList();
+                },
+              ),
+            ),
           ),
         ),
       ),
@@ -737,15 +759,26 @@ class SalesLineChart extends StatelessWidget {
 // Product Pie Chart Widget
 class ProductPieChart extends StatelessWidget {
   final List<Map<String, dynamic>> productsData;
+  final String currencySymbol;
 
-  const ProductPieChart({required this.productsData, super.key});
+  const ProductPieChart({
+    required this.productsData,
+    required this.currencySymbol,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     if (productsData.isEmpty) return const SizedBox.shrink();
 
-    final double totalRevenue = productsData.fold(
-        0.0, (sum, item) => sum + (item['revenue'] as double));
+    final visibleProducts = productsData
+        .where((item) => (item['revenue'] as num).toDouble() > 0)
+        .take(6)
+        .toList();
+    if (visibleProducts.isEmpty) return const SizedBox.shrink();
+
+    final double totalRevenue = visibleProducts.fold(
+        0.0, (sum, item) => sum + (item['revenue'] as num).toDouble());
 
     final List<PieChartSectionData> sections = [];
     final List<Color> colors = [
@@ -759,11 +792,11 @@ class ProductPieChart extends StatelessWidget {
       AppColors.successContainer,
     ];
 
-    for (int i = 0; i < productsData.length && i < 8; i++) {
-      final double revenue = productsData[i]['revenue'] as double;
+    for (int i = 0; i < visibleProducts.length; i++) {
+      final double revenue = (visibleProducts[i]['revenue'] as num).toDouble();
       final double percentage =
           totalRevenue > 0 ? (revenue / totalRevenue) * 100 : 0;
-      final String name = productsData[i]['name'] as String;
+      final String name = visibleProducts[i]['name'] as String;
       final String abbreviatedName =
           name.length > 10 ? '${name.substring(0, 8)}...' : name;
 
@@ -771,10 +804,12 @@ class ProductPieChart extends StatelessWidget {
         PieChartSectionData(
           color: colors[i % colors.length],
           value: percentage,
-          title: '$abbreviatedName\n₹${revenue.toStringAsFixed(0)}',
-          radius: 60,
+          title:
+              '$abbreviatedName\n$currencySymbol${revenue.toStringAsFixed(0)}',
+          radius: 66,
+          cornerRadius: 4,
           titleStyle: const TextStyle(
-            fontSize: 10,
+            fontSize: 9,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -782,92 +817,90 @@ class ProductPieChart extends StatelessWidget {
       );
     }
 
-    if (productsData.length > 8) {
-      final double othersRevenue = productsData
-          .skip(8)
-          .fold(0.0, (sum, item) => sum + (item['revenue'] as double));
-      final double othersPercentage =
-          totalRevenue > 0 ? (othersRevenue / totalRevenue) * 100 : 0;
-
-      sections.add(
-        PieChartSectionData(
-          color: AppColors.textHint,
-          value: othersPercentage,
-          title: 'Others\n₹${othersRevenue.toStringAsFixed(0)}',
-          radius: 60,
-          titleStyle: const TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      );
-    }
-
-    return AspectRatio(
-      aspectRatio: 1.3,
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: PieChart(
-          PieChartData(
-            pieTouchData: PieTouchData(
-              touchCallback: (event, touchResponse) {},
+    return Row(
+      children: [
+        Expanded(
+          flex: 5,
+          child: PieChart(
+            PieChartData(
+              pieTouchData: PieTouchData(),
+              borderData: FlBorderData(show: false),
+              sectionsSpace: 3,
+              centerSpaceRadius: 47,
+              centerSpaceColor: AppColors.surface,
+              sections: sections,
             ),
-            borderData: FlBorderData(show: false),
-            sectionsSpace: 0,
-            centerSpaceRadius: 40,
-            sections: sections,
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _QuickActionButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final VoidCallback onTap;
-
-  const _QuickActionButton({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(10),
-      elevation: 0,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(10),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 9),
-          child: Row(
+        const SizedBox(width: 10),
+        Expanded(
+          flex: 4,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(icon, size: 16, color: AppColors.primaryDarker),
-              const SizedBox(width: 4),
-              Flexible(
-                child: Text(
-                  label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 11.5,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.primaryDarker,
-                    letterSpacing: 0.1,
-                  ),
+              Text(
+                '$currencySymbol${totalRevenue.toStringAsFixed(0)}',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.textPrimary,
                 ),
               ),
+              const Text(
+                'Total revenue',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: AppColors.textSecondary,
+                ),
+              ),
+              const SizedBox(height: 14),
+              ...visibleProducts.asMap().entries.map((entry) {
+                final index = entry.key;
+                final item = entry.value;
+                final name = item['name'] as String;
+                final revenue = (item['revenue'] as num).toDouble();
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 7),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: colors[index % colors.length],
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 7),
+                      Expanded(
+                        child: Text(
+                          name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        '$currencySymbol${revenue.toStringAsFixed(0)}',
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 }
