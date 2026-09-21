@@ -67,5 +67,8 @@ android/app/upload-keystore.jks
 # Backup files
 *.bak
 
+# Generated invoice exports
+Invoice_*.pdf
+
 # Local test-only symlink to isar_flutter_libs native lib (recreated on demand)
 /libisar.so
