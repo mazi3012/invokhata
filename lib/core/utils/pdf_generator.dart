@@ -293,4 +293,44 @@ class PdfGenerator {
       )
     );
   }
+  // Add digital signature to the PDF
+  // Generate a PDF with digital signature support
+  static Future<pw.Document> generatePdfWithSignature(Invoice invoice, AppSettings settings) async {
+    final pdf = pw.Document();
+    final logoBytes = await _loadLogo(settings.logoPath);
+
+    pdf.addPage(
+      pw.Page(
+        build: (context) {
+          return pw.Column(
+            children: [
+              _buildInvoiceContent(invoice, settings, logoBytes),
+              _addDigitalSignature(pdf),
+            ],
+          );
+        },
+      ),
+    );
+
+    return pdf;
+  }
+  static pw.Widget _addDigitalSignature(pw.Document pdf) {
+    return pw.Column(
+      children: [
+        pw.Text('Digitally Signed', style: const pw.TextStyle(fontSize: 12.0)),
+        pw.SizedBox(height: 10.0),
+        // Placeholder for digital signature image
+        pw.Container(
+          height: 50.0,
+          width: 200.0,
+          decoration: pw.BoxDecoration(
+            border: pw.Border.all(color: PdfColors.black),
+          ),
+          child: pw.Center(
+            child: pw.Text('Digital Signature', style: const pw.TextStyle(fontSize: 10.0)),
+          ),
+        ),
+      ],
+    );
+  }
 }

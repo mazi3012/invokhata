@@ -37,83 +37,93 @@ const ItemSchema = CollectionSchema(
       name: r'category',
       type: IsarType.string,
     ),
-    r'discountAmount': PropertySchema(
+    r'cessAmount': PropertySchema(
       id: 4,
+      name: r'cessAmount',
+      type: IsarType.double,
+    ),
+    r'cessRate': PropertySchema(
+      id: 5,
+      name: r'cessRate',
+      type: IsarType.double,
+    ),
+    r'discountAmount': PropertySchema(
+      id: 6,
       name: r'discountAmount',
       type: IsarType.double,
     ),
     r'discountType': PropertySchema(
-      id: 5,
+      id: 7,
       name: r'discountType',
       type: IsarType.string,
     ),
     r'gstRate': PropertySchema(
-      id: 6,
+      id: 8,
       name: r'gstRate',
       type: IsarType.double,
     ),
     r'hsnCode': PropertySchema(
-      id: 7,
+      id: 9,
       name: r'hsnCode',
       type: IsarType.string,
     ),
     r'isGst': PropertySchema(
-      id: 8,
+      id: 10,
       name: r'isGst',
       type: IsarType.bool,
     ),
     r'itemLocation': PropertySchema(
-      id: 9,
+      id: 11,
       name: r'itemLocation',
       type: IsarType.string,
     ),
     r'minStockThreshold': PropertySchema(
-      id: 10,
+      id: 12,
       name: r'minStockThreshold',
       type: IsarType.double,
     ),
     r'name': PropertySchema(
-      id: 11,
+      id: 13,
       name: r'name',
       type: IsarType.string,
     ),
     r'purchasePrice': PropertySchema(
-      id: 12,
+      id: 14,
       name: r'purchasePrice',
       type: IsarType.double,
     ),
     r'purchasePriceIncludesTax': PropertySchema(
-      id: 13,
+      id: 15,
       name: r'purchasePriceIncludesTax',
       type: IsarType.bool,
     ),
     r'salesPrice': PropertySchema(
-      id: 14,
+      id: 16,
       name: r'salesPrice',
       type: IsarType.double,
     ),
     r'salesPriceIncludesTax': PropertySchema(
-      id: 15,
+      id: 17,
       name: r'salesPriceIncludesTax',
       type: IsarType.bool,
     ),
     r'stockQuantity': PropertySchema(
-      id: 16,
+      id: 18,
       name: r'stockQuantity',
       type: IsarType.double,
     ),
     r'taxRateName': PropertySchema(
-      id: 17,
+      id: 19,
       name: r'taxRateName',
       type: IsarType.string,
     ),
     r'unit': PropertySchema(
-      id: 18,
+      id: 20,
       name: r'unit',
       type: IsarType.string,
     ),
     r'wholesalePrice': PropertySchema(
-      id: 19,
+      id: 21,
       name: r'wholesalePrice',
       type: IsarType.double,
     )
@@ -206,22 +216,24 @@ void _itemSerialize(
   writer.writeDouble(offsets[1], object.atPricePerUnit);
   writer.writeString(offsets[2], object.barcode);
   writer.writeString(offsets[3], object.category);
-  writer.writeDouble(offsets[4], object.discountAmount);
-  writer.writeString(offsets[5], object.discountType);
-  writer.writeDouble(offsets[6], object.gstRate);
-  writer.writeString(offsets[7], object.hsnCode);
-  writer.writeBool(offsets[8], object.isGst);
-  writer.writeString(offsets[9], object.itemLocation);
-  writer.writeDouble(offsets[10], object.minStockThreshold);
-  writer.writeString(offsets[11], object.name);
-  writer.writeDouble(offsets[12], object.purchasePrice);
-  writer.writeBool(offsets[13], object.purchasePriceIncludesTax);
-  writer.writeDouble(offsets[14], object.salesPrice);
-  writer.writeBool(offsets[15], object.salesPriceIncludesTax);
-  writer.writeDouble(offsets[16], object.stockQuantity);
-  writer.writeString(offsets[17], object.taxRateName);
-  writer.writeString(offsets[18], object.unit);
-  writer.writeDouble(offsets[19], object.wholesalePrice);
+  writer.writeDouble(offsets[4], object.cessAmount);
+  writer.writeDouble(offsets[5], object.cessRate);
+  writer.writeDouble(offsets[6], object.discountAmount);
+  writer.writeString(offsets[7], object.discountType);
+  writer.writeDouble(offsets[8], object.gstRate);
+  writer.writeString(offsets[9], object.hsnCode);
+  writer.writeBool(offsets[10], object.isGst);
+  writer.writeString(offsets[11], object.itemLocation);
+  writer.writeDouble(offsets[12], object.minStockThreshold);
+  writer.writeString(offsets[13], object.name);
+  writer.writeDouble(offsets[14], object.purchasePrice);
+  writer.writeBool(offsets[15], object.purchasePriceIncludesTax);
+  writer.writeDouble(offsets[16], object.salesPrice);
+  writer.writeBool(offsets[17], object.salesPriceIncludesTax);
+  writer.writeDouble(offsets[18], object.stockQuantity);
+  writer.writeString(offsets[19], object.taxRateName);
+  writer.writeString(offsets[20], object.unit);
+  writer.writeDouble(offsets[21], object.wholesalePrice);
 }
 
 Item _itemDeserialize(
@@ -235,23 +247,25 @@ Item _itemDeserialize(
   object.atPricePerUnit = reader.readDouble(offsets[1]);
   object.barcode = reader.readStringOrNull(offsets[2]);
   object.category = reader.readStringOrNull(offsets[3]);
-  object.discountAmount = reader.readDouble(offsets[4]);
-  object.discountType = reader.readString(offsets[5]);
-  object.gstRate = reader.readDouble(offsets[6]);
-  object.hsnCode = reader.readStringOrNull(offsets[7]);
+  object.cessAmount = reader.readDouble(offsets[4]);
+  object.cessRate = reader.readDouble(offsets[5]);
+  object.discountAmount = reader.readDouble(offsets[6]);
+  object.discountType = reader.readString(offsets[7]);
+  object.gstRate = reader.readDouble(offsets[8]);
+  object.hsnCode = reader.readStringOrNull(offsets[9]);
   object.id = id;
-  object.isGst = reader.readBool(offsets[8]);
-  object.itemLocation = reader.readStringOrNull(offsets[9]);
-  object.minStockThreshold = reader.readDouble(offsets[10]);
-  object.name = reader.readString(offsets[11]);
-  object.purchasePrice = reader.readDouble(offsets[12]);
-  object.purchasePriceIncludesTax = reader.readBool(offsets[13]);
-  object.salesPrice = reader.readDouble(offsets[14]);
-  object.salesPriceIncludesTax = reader.readBool(offsets[15]);
-  object.stockQuantity = reader.readDouble(offsets[16]);
-  object.taxRateName = reader.readString(offsets[17]);
-  object.unit = reader.readString(offsets[18]);
-  object.wholesalePrice = reader.readDouble(offsets[19]);
+  object.isGst = reader.readBool(offsets[10]);
+  object.itemLocation = reader.readStringOrNull(offsets[11]);
+  object.minStockThreshold = reader.readDouble(offsets[12]);
+  object.name = reader.readString(offsets[13]);
+  object.purchasePrice = reader.readDouble(offsets[14]);
+  object.purchasePriceIncludesTax = reader.readBool(offsets[15]);
+  object.salesPrice = reader.readDouble(offsets[16]);
+  object.salesPriceIncludesTax = reader.readBool(offsets[17]);
+  object.stockQuantity = reader.readDouble(offsets[18]);
+  object.taxRateName = reader.readString(offsets[19]);
+  object.unit = reader.readString(offsets[20]);
+  object.wholesalePrice = reader.readDouble(offsets[21]);
   return object;
 }
 
@@ -273,23 +287,23 @@ P _itemDeserializeProp<P>(
     case 4:
       return (reader.readDouble(offset)) as P;
     case 5:
-      return (reader.readString(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 6:
       return (reader.readDouble(offset)) as P;
     case 7:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 8:
-      return (reader.readBool(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 9:
       return (reader.readStringOrNull(offset)) as P;
     case 10:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 11:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 12:
       return (reader.readDouble(offset)) as P;
     case 13:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 14:
       return (reader.readDouble(offset)) as P;
     case 15:
@@ -297,10 +311,14 @@ P _itemDeserializeProp<P>(
     case 16:
       return (reader.readDouble(offset)) as P;
     case 17:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 18:
-      return (reader.readString(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 19:
+      return (reader.readString(offset)) as P;
+    case 20:
+      return (reader.readString(offset)) as P;
+    case 21:
       return (reader.readDouble(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1017,6 +1035,130 @@ extension ItemQueryFilter on QueryBuilder<Item, Item, QFilterCondition> {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'category',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterFilterCondition> cessAmountEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'cessAmount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterFilterCondition> cessAmountGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'cessAmount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterFilterCondition> cessAmountLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'cessAmount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterFilterCondition> cessAmountBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'cessAmount',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterFilterCondition> cessRateEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'cessRate',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterFilterCondition> cessRateGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'cessRate',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterFilterCondition> cessRateLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'cessRate',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterFilterCondition> cessRateBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'cessRate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -2396,6 +2538,30 @@ extension ItemQuerySortBy on QueryBuilder<Item, Item, QSortBy> {
     });
   }
 
+  QueryBuilder<Item, Item, QAfterSortBy> sortByCessAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'cessAmount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterSortBy> sortByCessAmountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'cessAmount', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterSortBy> sortByCessRate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'cessRate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterSortBy> sortByCessRateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'cessRate', Sort.desc);
+    });
+  }
+
   QueryBuilder<Item, Item, QAfterSortBy> sortByDiscountAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'discountAmount', Sort.asc);
@@ -2638,6 +2804,30 @@ extension ItemQuerySortThenBy on QueryBuilder<Item, Item, QSortThenBy> {
     });
   }
 
+  QueryBuilder<Item, Item, QAfterSortBy> thenByCessAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'cessAmount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterSortBy> thenByCessAmountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'cessAmount', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterSortBy> thenByCessRate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'cessRate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Item, Item, QAfterSortBy> thenByCessRateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'cessRate', Sort.desc);
+    });
+  }
+
   QueryBuilder<Item, Item, QAfterSortBy> thenByDiscountAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'discountAmount', Sort.asc);
@@ -2870,6 +3060,18 @@ extension ItemQueryWhereDistinct on QueryBuilder<Item, Item, QDistinct> {
     });
   }
 
+  QueryBuilder<Item, Item, QDistinct> distinctByCessAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'cessAmount');
+    });
+  }
+
+  QueryBuilder<Item, Item, QDistinct> distinctByCessRate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'cessRate');
+    });
+  }
+
   QueryBuilder<Item, Item, QDistinct> distinctByDiscountAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'discountAmount');
@@ -3001,6 +3203,18 @@ extension ItemQueryProperty on QueryBuilder<Item, Item, QQueryProperty> {
   QueryBuilder<Item, String?, QQueryOperations> categoryProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'category');
+    });
+  }
+
+  QueryBuilder<Item, double, QQueryOperations> cessAmountProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'cessAmount');
+    });
+  }
+
+  QueryBuilder<Item, double, QQueryOperations> cessRateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'cessRate');
     });
   }
 

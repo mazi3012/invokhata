@@ -119,6 +119,15 @@ class CartState {
     });
   }
 
+  double get totalCess {
+    if (!isGstInvoice) return 0.0;
+    return items.fold(0.0, (sum, cartItem) {
+      if (!cartItem.item.isGst) return sum;
+      final taxable = _calculate(cartItem).taxableAmount;
+      return sum + CessCalculator.calculateCess(taxable, cartItem.item.cessRate);
+    });
+  }
+
   bool get isInterState {
     if (taxMode == 'igst') return true;
     if (taxMode == 'cgst_sgst') return false;
@@ -161,9 +170,9 @@ class CartState {
       ? items.fold(0.0, (sum, item) => sum + _calculate(item).igst)
       : 0.0;
 
-  double get amountDue => (subtotal + totalGst) - discountAmount - paidAmount;
+  double get amountDue => grandTotal - paidAmount;
 
-  double get grandTotal => (subtotal + totalGst) - discountAmount;
+  double get grandTotal => (subtotal + totalGst + totalCess) - discountAmount;
   PaymentMode get paymentModeEnum => _stringToPaymentMode(paymentMode);
 
   CartState copyWith({

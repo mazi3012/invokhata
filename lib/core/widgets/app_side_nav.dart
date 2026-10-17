@@ -6,6 +6,7 @@ import '../../features/pos/presentation/screens/all_invoices_screen.dart';
 import '../../features/inventory/presentation/screens/inventory_screen.dart';
 import '../../features/khata/presentation/screens/khata_screen.dart';
 import '../../features/purchase/presentation/screens/all_purchases_screen.dart';
+import '../../features/credit_notes/presentation/screens/credit_notes_screen.dart';
 import '../../features/reports/presentation/screens/gst_reports_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
 
@@ -29,8 +30,9 @@ class _AppSideNavState extends State<AppSideNav> {
       3 => const AllPurchasesScreen(),
       4 => const KhataScreen(),
       5 => const InventoryScreen(),
-      6 => const GstReportsScreen(),
-      7 => const SettingsScreen(),
+      6 => const CreditNotesScreen(),
+      7 => const GstReportsScreen(),
+      8 => const SettingsScreen(),
       _ => const DashboardScreen(),
     };
     Navigator.pushReplacement(
@@ -163,12 +165,19 @@ class _AppSideNavState extends State<AppSideNav> {
                     isExpanded: _isExpanded,
                     onTap: () => _onDestinationSelected(context, 5)),
                 _NavItem(
-                    icon: Icons.assessment_outlined,
-                    activeIcon: Icons.assessment,
-                    title: 'GST Reports',
+                    icon: Icons.note_alt_outlined,
+                    activeIcon: Icons.note_alt,
+                    title: 'Credit Notes',
                     isSelected: widget.currentIndex == 6,
                     isExpanded: _isExpanded,
                     onTap: () => _onDestinationSelected(context, 6)),
+                _NavItem(
+                    icon: Icons.assessment_outlined,
+                    activeIcon: Icons.assessment,
+                    title: 'GST Reports',
+                    isSelected: widget.currentIndex == 7,
+                    isExpanded: _isExpanded,
+                    onTap: () => _onDestinationSelected(context, 7)),
                 const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Divider()),
@@ -176,9 +185,9 @@ class _AppSideNavState extends State<AppSideNav> {
                     icon: Icons.settings_outlined,
                     activeIcon: Icons.settings,
                     title: 'Settings',
-                    isSelected: widget.currentIndex == 7,
+                    isSelected: widget.currentIndex == 8,
                     isExpanded: _isExpanded,
-                    onTap: () => _onDestinationSelected(context, 7)),
+                    onTap: () => _onDestinationSelected(context, 8)),
               ],
             ),
           ),

@@ -14,18 +14,31 @@ class AppSettings {
   final double defaultTaxRate;
   final String logoPath;
 
+  final String gstRegistrationType; // regular, composition, unregistered
+  final double compositionTaxRate; // 1% or 0.5%
+  final String invoicePrefix;
+  final String invoiceSuffix;
+  final bool invoiceIncludeYear;
+  final int invoicePadLength;
+  final String invoiceSeparator;
+
   AppSettings({
     this.businessName = 'INVOKHATA RETAIL',
     this.businessAddress = 'Main Market, City',
     this.businessPhone = '+91 9876543210',
-    // Do not use a fake GSTIN as a default: it could accidentally reach a
-    // statutory export without being noticed.
     this.taxId = '',
     this.businessState = 'Assam',
     this.country = 'India',
     this.currencySymbol = '₹',
     this.defaultTaxRate = 5.0,
     this.logoPath = '',
+    this.gstRegistrationType = 'regular',
+    this.compositionTaxRate = 1.0,
+    this.invoicePrefix = 'INV',
+    this.invoiceSuffix = '',
+    this.invoiceIncludeYear = true,
+    this.invoicePadLength = 4,
+    this.invoiceSeparator = '-',
   });
 
   Map<String, dynamic> toJson() => {
@@ -38,6 +51,13 @@ class AppSettings {
         'currencySymbol': currencySymbol,
         'defaultTaxRate': defaultTaxRate,
         'logoPath': logoPath,
+        'gstRegistrationType': gstRegistrationType,
+        'compositionTaxRate': compositionTaxRate,
+        'invoicePrefix': invoicePrefix,
+        'invoiceSuffix': invoiceSuffix,
+        'invoiceIncludeYear': invoiceIncludeYear,
+        'invoicePadLength': invoicePadLength,
+        'invoiceSeparator': invoiceSeparator,
       };
 
   factory AppSettings.fromJson(Map<String, dynamic> json) => AppSettings(
@@ -50,6 +70,14 @@ class AppSettings {
         currencySymbol: json['currencySymbol'] ?? '₹',
         defaultTaxRate: (json['defaultTaxRate'] as num?)?.toDouble() ?? 5.0,
         logoPath: json['logoPath'] ?? '',
+        gstRegistrationType: json['gstRegistrationType'] ?? 'regular',
+        compositionTaxRate:
+            (json['compositionTaxRate'] as num?)?.toDouble() ?? 1.0,
+        invoicePrefix: json['invoicePrefix'] ?? 'INV',
+        invoiceSuffix: json['invoiceSuffix'] ?? '',
+        invoiceIncludeYear: json['invoiceIncludeYear'] ?? true,
+        invoicePadLength: json['invoicePadLength'] ?? 4,
+        invoiceSeparator: json['invoiceSeparator'] ?? '-',
       );
 
   AppSettings copyWith({
@@ -62,6 +90,13 @@ class AppSettings {
     String? currencySymbol,
     double? defaultTaxRate,
     String? logoPath,
+    String? gstRegistrationType,
+    double? compositionTaxRate,
+    String? invoicePrefix,
+    String? invoiceSuffix,
+    bool? invoiceIncludeYear,
+    int? invoicePadLength,
+    String? invoiceSeparator,
   }) {
     return AppSettings(
       businessName: businessName ?? this.businessName,
@@ -73,6 +108,13 @@ class AppSettings {
       currencySymbol: currencySymbol ?? this.currencySymbol,
       defaultTaxRate: defaultTaxRate ?? this.defaultTaxRate,
       logoPath: logoPath ?? this.logoPath,
+      gstRegistrationType: gstRegistrationType ?? this.gstRegistrationType,
+      compositionTaxRate: compositionTaxRate ?? this.compositionTaxRate,
+      invoicePrefix: invoicePrefix ?? this.invoicePrefix,
+      invoiceSuffix: invoiceSuffix ?? this.invoiceSuffix,
+      invoiceIncludeYear: invoiceIncludeYear ?? this.invoiceIncludeYear,
+      invoicePadLength: invoicePadLength ?? this.invoicePadLength,
+      invoiceSeparator: invoiceSeparator ?? this.invoiceSeparator,
     );
   }
 }

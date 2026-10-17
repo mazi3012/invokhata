@@ -22,131 +22,241 @@ const InvoiceSchema = CollectionSchema(
       name: r'discountAmount',
       type: IsarType.double,
     ),
-    r'dueAmount': PropertySchema(
+    r'distance': PropertySchema(
       id: 1,
+      name: r'distance',
+      type: IsarType.double,
+    ),
+    r'documentType': PropertySchema(
+      id: 2,
+      name: r'documentType',
+      type: IsarType.string,
+    ),
+    r'dueAmount': PropertySchema(
+      id: 3,
       name: r'dueAmount',
       type: IsarType.double,
     ),
     r'eInvoiceIrn': PropertySchema(
-      id: 2,
+      id: 4,
       name: r'eInvoiceIrn',
       type: IsarType.string,
     ),
+    r'ewayBillDate': PropertySchema(
+      id: 5,
+      name: r'ewayBillDate',
+      type: IsarType.dateTime,
+    ),
+    r'ewayBillNumber': PropertySchema(
+      id: 6,
+      name: r'ewayBillNumber',
+      type: IsarType.string,
+    ),
+    r'ewayBillValidUpto': PropertySchema(
+      id: 7,
+      name: r'ewayBillValidUpto',
+      type: IsarType.dateTime,
+    ),
+    r'exchangeRate': PropertySchema(
+      id: 8,
+      name: r'exchangeRate',
+      type: IsarType.double,
+    ),
+    r'exportCountry': PropertySchema(
+      id: 9,
+      name: r'exportCountry',
+      type: IsarType.string,
+    ),
+    r'exportType': PropertySchema(
+      id: 10,
+      name: r'exportType',
+      type: IsarType.string,
+    ),
+    r'foreignCurrency': PropertySchema(
+      id: 11,
+      name: r'foreignCurrency',
+      type: IsarType.string,
+    ),
+    r'foreignCurrencyAmount': PropertySchema(
+      id: 12,
+      name: r'foreignCurrencyAmount',
+      type: IsarType.double,
+    ),
     r'grandTotal': PropertySchema(
-      id: 3,
+      id: 13,
       name: r'grandTotal',
       type: IsarType.double,
     ),
     r'invoiceDate': PropertySchema(
-      id: 4,
+      id: 14,
       name: r'invoiceDate',
       type: IsarType.dateTime,
     ),
     r'invoiceNumber': PropertySchema(
-      id: 5,
+      id: 15,
       name: r'invoiceNumber',
       type: IsarType.string,
     ),
     r'invoiceSeq': PropertySchema(
-      id: 6,
+      id: 16,
       name: r'invoiceSeq',
       type: IsarType.long,
     ),
     r'invoiceType': PropertySchema(
-      id: 7,
+      id: 17,
       name: r'invoiceType',
       type: IsarType.string,
     ),
     r'isGstInvoice': PropertySchema(
-      id: 8,
+      id: 18,
       name: r'isGstInvoice',
       type: IsarType.bool,
     ),
     r'isReverseCharge': PropertySchema(
-      id: 9,
+      id: 19,
       name: r'isReverseCharge',
       type: IsarType.bool,
     ),
     r'items': PropertySchema(
-      id: 10,
+      id: 20,
       name: r'items',
       type: IsarType.objectList,
       target: r'InvoiceLineItem',
     ),
     r'paidAmount': PropertySchema(
-      id: 11,
+      id: 21,
       name: r'paidAmount',
       type: IsarType.double,
     ),
     r'partyGstin': PropertySchema(
-      id: 12,
+      id: 22,
       name: r'partyGstin',
       type: IsarType.string,
     ),
     r'partyId': PropertySchema(
-      id: 13,
+      id: 23,
       name: r'partyId',
       type: IsarType.long,
     ),
     r'partyName': PropertySchema(
-      id: 14,
+      id: 24,
       name: r'partyName',
       type: IsarType.string,
     ),
     r'partyPhone': PropertySchema(
-      id: 15,
+      id: 25,
       name: r'partyPhone',
       type: IsarType.string,
     ),
     r'partyState': PropertySchema(
-      id: 16,
+      id: 26,
       name: r'partyState',
       type: IsarType.string,
     ),
     r'paymentMode': PropertySchema(
-      id: 17,
+      id: 27,
       name: r'paymentMode',
       type: IsarType.string,
     ),
     r'paymentStatus': PropertySchema(
-      id: 18,
+      id: 28,
       name: r'paymentStatus',
       type: IsarType.string,
     ),
+    r'placeOfDispatch': PropertySchema(
+      id: 29,
+      name: r'placeOfDispatch',
+      type: IsarType.string,
+    ),
     r'placeOfSupplyState': PropertySchema(
-      id: 19,
+      id: 30,
       name: r'placeOfSupplyState',
       type: IsarType.string,
     ),
+    r'portCode': PropertySchema(
+      id: 31,
+      name: r'portCode',
+      type: IsarType.string,
+    ),
+    r'portName': PropertySchema(
+      id: 32,
+      name: r'portName',
+      type: IsarType.string,
+    ),
+    r'rcmCollected': PropertySchema(
+      id: 33,
+      name: r'rcmCollected',
+      type: IsarType.double,
+    ),
+    r'shippingBillDate': PropertySchema(
+      id: 34,
+      name: r'shippingBillDate',
+      type: IsarType.dateTime,
+    ),
+    r'shippingBillNumber': PropertySchema(
+      id: 35,
+      name: r'shippingBillNumber',
+      type: IsarType.string,
+    ),
+    r'stateOfDispatch': PropertySchema(
+      id: 36,
+      name: r'stateOfDispatch',
+      type: IsarType.string,
+    ),
+    r'subSupplyType': PropertySchema(
+      id: 37,
+      name: r'subSupplyType',
+      type: IsarType.string,
+    ),
     r'subtotal': PropertySchema(
-      id: 20,
+      id: 38,
       name: r'subtotal',
       type: IsarType.double,
     ),
+    r'supplyType': PropertySchema(
+      id: 39,
+      name: r'supplyType',
+      type: IsarType.string,
+    ),
     r'taxMode': PropertySchema(
-      id: 21,
+      id: 40,
       name: r'taxMode',
       type: IsarType.string,
     ),
     r'totalCgst': PropertySchema(
-      id: 22,
+      id: 41,
       name: r'totalCgst',
       type: IsarType.double,
     ),
     r'totalGst': PropertySchema(
-      id: 23,
+      id: 42,
       name: r'totalGst',
       type: IsarType.double,
     ),
     r'totalIgst': PropertySchema(
-      id: 24,
+      id: 43,
       name: r'totalIgst',
       type: IsarType.double,
     ),
     r'totalSgst': PropertySchema(
-      id: 25,
+      id: 44,
       name: r'totalSgst',
       type: IsarType.double,
+    ),
+    r'transporterId': PropertySchema(
+      id: 45,
+      name: r'transporterId',
+      type: IsarType.string,
+    ),
+    r'transporterName': PropertySchema(
+      id: 46,
+      name: r'transporterName',
+      type: IsarType.string,
+    ),
+    r'vehicleNumber': PropertySchema(
+      id: 47,
+      name: r'vehicleNumber',
+      type: IsarType.string,
     )
   },
   estimateSize: _invoiceEstimateSize,
@@ -197,7 +307,37 @@ int _invoiceEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
+    final value = object.documentType;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.eInvoiceIrn;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.ewayBillNumber;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.exportCountry;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.exportType;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.foreignCurrency;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -234,8 +374,68 @@ int _invoiceEstimateSize(
   }
   bytesCount += 3 + object.paymentMode.length * 3;
   bytesCount += 3 + object.paymentStatus.length * 3;
+  {
+    final value = object.placeOfDispatch;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.placeOfSupplyState.length * 3;
+  {
+    final value = object.portCode;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.portName;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.shippingBillNumber;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.stateOfDispatch;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.subSupplyType;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.supplyType;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.taxMode.length * 3;
+  {
+    final value = object.transporterId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.transporterName;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.vehicleNumber;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -246,36 +446,58 @@ void _invoiceSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeDouble(offsets[0], object.discountAmount);
-  writer.writeDouble(offsets[1], object.dueAmount);
-  writer.writeString(offsets[2], object.eInvoiceIrn);
-  writer.writeDouble(offsets[3], object.grandTotal);
-  writer.writeDateTime(offsets[4], object.invoiceDate);
-  writer.writeString(offsets[5], object.invoiceNumber);
-  writer.writeLong(offsets[6], object.invoiceSeq);
-  writer.writeString(offsets[7], object.invoiceType);
-  writer.writeBool(offsets[8], object.isGstInvoice);
-  writer.writeBool(offsets[9], object.isReverseCharge);
+  writer.writeDouble(offsets[1], object.distance);
+  writer.writeString(offsets[2], object.documentType);
+  writer.writeDouble(offsets[3], object.dueAmount);
+  writer.writeString(offsets[4], object.eInvoiceIrn);
+  writer.writeDateTime(offsets[5], object.ewayBillDate);
+  writer.writeString(offsets[6], object.ewayBillNumber);
+  writer.writeDateTime(offsets[7], object.ewayBillValidUpto);
+  writer.writeDouble(offsets[8], object.exchangeRate);
+  writer.writeString(offsets[9], object.exportCountry);
+  writer.writeString(offsets[10], object.exportType);
+  writer.writeString(offsets[11], object.foreignCurrency);
+  writer.writeDouble(offsets[12], object.foreignCurrencyAmount);
+  writer.writeDouble(offsets[13], object.grandTotal);
+  writer.writeDateTime(offsets[14], object.invoiceDate);
+  writer.writeString(offsets[15], object.invoiceNumber);
+  writer.writeLong(offsets[16], object.invoiceSeq);
+  writer.writeString(offsets[17], object.invoiceType);
+  writer.writeBool(offsets[18], object.isGstInvoice);
+  writer.writeBool(offsets[19], object.isReverseCharge);
   writer.writeObjectList<InvoiceLineItem>(
-    offsets[10],
+    offsets[20],
     allOffsets,
     InvoiceLineItemSchema.serialize,
     object.items,
   );
-  writer.writeDouble(offsets[11], object.paidAmount);
-  writer.writeString(offsets[12], object.partyGstin);
-  writer.writeLong(offsets[13], object.partyId);
-  writer.writeString(offsets[14], object.partyName);
-  writer.writeString(offsets[15], object.partyPhone);
-  writer.writeString(offsets[16], object.partyState);
-  writer.writeString(offsets[17], object.paymentMode);
-  writer.writeString(offsets[18], object.paymentStatus);
-  writer.writeString(offsets[19], object.placeOfSupplyState);
-  writer.writeDouble(offsets[20], object.subtotal);
-  writer.writeString(offsets[21], object.taxMode);
-  writer.writeDouble(offsets[22], object.totalCgst);
-  writer.writeDouble(offsets[23], object.totalGst);
-  writer.writeDouble(offsets[24], object.totalIgst);
-  writer.writeDouble(offsets[25], object.totalSgst);
+  writer.writeDouble(offsets[21], object.paidAmount);
+  writer.writeString(offsets[22], object.partyGstin);
+  writer.writeLong(offsets[23], object.partyId);
+  writer.writeString(offsets[24], object.partyName);
+  writer.writeString(offsets[25], object.partyPhone);
+  writer.writeString(offsets[26], object.partyState);
+  writer.writeString(offsets[27], object.paymentMode);
+  writer.writeString(offsets[28], object.paymentStatus);
+  writer.writeString(offsets[29], object.placeOfDispatch);
+  writer.writeString(offsets[30], object.placeOfSupplyState);
+  writer.writeString(offsets[31], object.portCode);
+  writer.writeString(offsets[32], object.portName);
+  writer.writeDouble(offsets[33], object.rcmCollected);
+  writer.writeDateTime(offsets[34], object.shippingBillDate);
+  writer.writeString(offsets[35], object.shippingBillNumber);
+  writer.writeString(offsets[36], object.stateOfDispatch);
+  writer.writeString(offsets[37], object.subSupplyType);
+  writer.writeDouble(offsets[38], object.subtotal);
+  writer.writeString(offsets[39], object.supplyType);
+  writer.writeString(offsets[40], object.taxMode);
+  writer.writeDouble(offsets[41], object.totalCgst);
+  writer.writeDouble(offsets[42], object.totalGst);
+  writer.writeDouble(offsets[43], object.totalIgst);
+  writer.writeDouble(offsets[44], object.totalSgst);
+  writer.writeString(offsets[45], object.transporterId);
+  writer.writeString(offsets[46], object.transporterName);
+  writer.writeString(offsets[47], object.vehicleNumber);
 }
 
 Invoice _invoiceDeserialize(
@@ -286,38 +508,60 @@ Invoice _invoiceDeserialize(
 ) {
   final object = Invoice();
   object.discountAmount = reader.readDouble(offsets[0]);
-  object.dueAmount = reader.readDouble(offsets[1]);
-  object.eInvoiceIrn = reader.readStringOrNull(offsets[2]);
-  object.grandTotal = reader.readDouble(offsets[3]);
+  object.distance = reader.readDoubleOrNull(offsets[1]);
+  object.documentType = reader.readStringOrNull(offsets[2]);
+  object.dueAmount = reader.readDouble(offsets[3]);
+  object.eInvoiceIrn = reader.readStringOrNull(offsets[4]);
+  object.ewayBillDate = reader.readDateTimeOrNull(offsets[5]);
+  object.ewayBillNumber = reader.readStringOrNull(offsets[6]);
+  object.ewayBillValidUpto = reader.readDateTimeOrNull(offsets[7]);
+  object.exchangeRate = reader.readDoubleOrNull(offsets[8]);
+  object.exportCountry = reader.readStringOrNull(offsets[9]);
+  object.exportType = reader.readStringOrNull(offsets[10]);
+  object.foreignCurrency = reader.readStringOrNull(offsets[11]);
+  object.foreignCurrencyAmount = reader.readDoubleOrNull(offsets[12]);
+  object.grandTotal = reader.readDouble(offsets[13]);
   object.id = id;
-  object.invoiceDate = reader.readDateTime(offsets[4]);
-  object.invoiceNumber = reader.readString(offsets[5]);
-  object.invoiceSeq = reader.readLong(offsets[6]);
-  object.invoiceType = reader.readString(offsets[7]);
-  object.isGstInvoice = reader.readBool(offsets[8]);
-  object.isReverseCharge = reader.readBool(offsets[9]);
+  object.invoiceDate = reader.readDateTime(offsets[14]);
+  object.invoiceNumber = reader.readString(offsets[15]);
+  object.invoiceSeq = reader.readLong(offsets[16]);
+  object.invoiceType = reader.readString(offsets[17]);
+  object.isGstInvoice = reader.readBool(offsets[18]);
+  object.isReverseCharge = reader.readBool(offsets[19]);
   object.items = reader.readObjectList<InvoiceLineItem>(
-        offsets[10],
+        offsets[20],
         InvoiceLineItemSchema.deserialize,
         allOffsets,
         InvoiceLineItem(),
       ) ??
       [];
-  object.paidAmount = reader.readDouble(offsets[11]);
-  object.partyGstin = reader.readStringOrNull(offsets[12]);
-  object.partyId = reader.readLongOrNull(offsets[13]);
-  object.partyName = reader.readString(offsets[14]);
-  object.partyPhone = reader.readStringOrNull(offsets[15]);
-  object.partyState = reader.readStringOrNull(offsets[16]);
-  object.paymentMode = reader.readString(offsets[17]);
-  object.paymentStatus = reader.readString(offsets[18]);
-  object.placeOfSupplyState = reader.readString(offsets[19]);
-  object.subtotal = reader.readDouble(offsets[20]);
-  object.taxMode = reader.readString(offsets[21]);
-  object.totalCgst = reader.readDouble(offsets[22]);
-  object.totalGst = reader.readDouble(offsets[23]);
-  object.totalIgst = reader.readDouble(offsets[24]);
-  object.totalSgst = reader.readDouble(offsets[25]);
+  object.paidAmount = reader.readDouble(offsets[21]);
+  object.partyGstin = reader.readStringOrNull(offsets[22]);
+  object.partyId = reader.readLongOrNull(offsets[23]);
+  object.partyName = reader.readString(offsets[24]);
+  object.partyPhone = reader.readStringOrNull(offsets[25]);
+  object.partyState = reader.readStringOrNull(offsets[26]);
+  object.paymentMode = reader.readString(offsets[27]);
+  object.paymentStatus = reader.readString(offsets[28]);
+  object.placeOfDispatch = reader.readStringOrNull(offsets[29]);
+  object.placeOfSupplyState = reader.readString(offsets[30]);
+  object.portCode = reader.readStringOrNull(offsets[31]);
+  object.portName = reader.readStringOrNull(offsets[32]);
+  object.rcmCollected = reader.readDouble(offsets[33]);
+  object.shippingBillDate = reader.readDateTimeOrNull(offsets[34]);
+  object.shippingBillNumber = reader.readStringOrNull(offsets[35]);
+  object.stateOfDispatch = reader.readStringOrNull(offsets[36]);
+  object.subSupplyType = reader.readStringOrNull(offsets[37]);
+  object.subtotal = reader.readDouble(offsets[38]);
+  object.supplyType = reader.readStringOrNull(offsets[39]);
+  object.taxMode = reader.readString(offsets[40]);
+  object.totalCgst = reader.readDouble(offsets[41]);
+  object.totalGst = reader.readDouble(offsets[42]);
+  object.totalIgst = reader.readDouble(offsets[43]);
+  object.totalSgst = reader.readDouble(offsets[44]);
+  object.transporterId = reader.readStringOrNull(offsets[45]);
+  object.transporterName = reader.readStringOrNull(offsets[46]);
+  object.vehicleNumber = reader.readStringOrNull(offsets[47]);
   return object;
 }
 
@@ -331,24 +575,44 @@ P _invoiceDeserializeProp<P>(
     case 0:
       return (reader.readDouble(offset)) as P;
     case 1:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
       return (reader.readDouble(offset)) as P;
     case 4:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 5:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 6:
-      return (reader.readLong(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 7:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 8:
-      return (reader.readBool(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 9:
-      return (reader.readBool(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 10:
+      return (reader.readStringOrNull(offset)) as P;
+    case 11:
+      return (reader.readStringOrNull(offset)) as P;
+    case 12:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 13:
+      return (reader.readDouble(offset)) as P;
+    case 14:
+      return (reader.readDateTime(offset)) as P;
+    case 15:
+      return (reader.readString(offset)) as P;
+    case 16:
+      return (reader.readLong(offset)) as P;
+    case 17:
+      return (reader.readString(offset)) as P;
+    case 18:
+      return (reader.readBool(offset)) as P;
+    case 19:
+      return (reader.readBool(offset)) as P;
+    case 20:
       return (reader.readObjectList<InvoiceLineItem>(
             offset,
             InvoiceLineItemSchema.deserialize,
@@ -356,36 +620,60 @@ P _invoiceDeserializeProp<P>(
             InvoiceLineItem(),
           ) ??
           []) as P;
-    case 11:
-      return (reader.readDouble(offset)) as P;
-    case 12:
-      return (reader.readStringOrNull(offset)) as P;
-    case 13:
-      return (reader.readLongOrNull(offset)) as P;
-    case 14:
-      return (reader.readString(offset)) as P;
-    case 15:
-      return (reader.readStringOrNull(offset)) as P;
-    case 16:
-      return (reader.readStringOrNull(offset)) as P;
-    case 17:
-      return (reader.readString(offset)) as P;
-    case 18:
-      return (reader.readString(offset)) as P;
-    case 19:
-      return (reader.readString(offset)) as P;
-    case 20:
-      return (reader.readDouble(offset)) as P;
     case 21:
-      return (reader.readString(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 22:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 23:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 24:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 25:
+      return (reader.readStringOrNull(offset)) as P;
+    case 26:
+      return (reader.readStringOrNull(offset)) as P;
+    case 27:
+      return (reader.readString(offset)) as P;
+    case 28:
+      return (reader.readString(offset)) as P;
+    case 29:
+      return (reader.readStringOrNull(offset)) as P;
+    case 30:
+      return (reader.readString(offset)) as P;
+    case 31:
+      return (reader.readStringOrNull(offset)) as P;
+    case 32:
+      return (reader.readStringOrNull(offset)) as P;
+    case 33:
       return (reader.readDouble(offset)) as P;
+    case 34:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 35:
+      return (reader.readStringOrNull(offset)) as P;
+    case 36:
+      return (reader.readStringOrNull(offset)) as P;
+    case 37:
+      return (reader.readStringOrNull(offset)) as P;
+    case 38:
+      return (reader.readDouble(offset)) as P;
+    case 39:
+      return (reader.readStringOrNull(offset)) as P;
+    case 40:
+      return (reader.readString(offset)) as P;
+    case 41:
+      return (reader.readDouble(offset)) as P;
+    case 42:
+      return (reader.readDouble(offset)) as P;
+    case 43:
+      return (reader.readDouble(offset)) as P;
+    case 44:
+      return (reader.readDouble(offset)) as P;
+    case 45:
+      return (reader.readStringOrNull(offset)) as P;
+    case 46:
+      return (reader.readStringOrNull(offset)) as P;
+    case 47:
+      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -742,6 +1030,232 @@ extension InvoiceQueryFilter
     });
   }
 
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> distanceIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'distance',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> distanceIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'distance',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> distanceEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'distance',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> distanceGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'distance',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> distanceLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'distance',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> distanceBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'distance',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'documentType',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      documentTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'documentType',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'documentType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'documentType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'documentType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'documentType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'documentType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'documentType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'documentType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'documentType',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> documentTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'documentType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      documentTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'documentType',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Invoice, Invoice, QAfterFilterCondition> dueAmountEqualTo(
     double value, {
     double epsilon = Query.epsilon,
@@ -947,6 +1461,911 @@ extension InvoiceQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'eInvoiceIrn',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'ewayBillDate',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'ewayBillDate',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillDateEqualTo(
+      DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ewayBillDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'ewayBillDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'ewayBillDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'ewayBillDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillNumberIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'ewayBillNumber',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillNumberIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'ewayBillNumber',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillNumberEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ewayBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillNumberGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'ewayBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillNumberLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'ewayBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillNumberBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'ewayBillNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'ewayBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'ewayBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillNumberContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'ewayBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> ewayBillNumberMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'ewayBillNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillNumberIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ewayBillNumber',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillNumberIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'ewayBillNumber',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillValidUptoIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'ewayBillValidUpto',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillValidUptoIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'ewayBillValidUpto',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillValidUptoEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ewayBillValidUpto',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillValidUptoGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'ewayBillValidUpto',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillValidUptoLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'ewayBillValidUpto',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      ewayBillValidUptoBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'ewayBillValidUpto',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exchangeRateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'exchangeRate',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      exchangeRateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'exchangeRate',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exchangeRateEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'exchangeRate',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exchangeRateGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'exchangeRate',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exchangeRateLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'exchangeRate',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exchangeRateBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'exchangeRate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportCountryIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'exportCountry',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      exportCountryIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'exportCountry',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportCountryEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'exportCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      exportCountryGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'exportCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportCountryLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'exportCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportCountryBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'exportCountry',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportCountryStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'exportCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportCountryEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'exportCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportCountryContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'exportCountry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportCountryMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'exportCountry',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportCountryIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'exportCountry',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      exportCountryIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'exportCountry',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'exportType',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'exportType',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'exportType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'exportType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'exportType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'exportType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'exportType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'exportType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'exportType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'exportType',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'exportType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> exportTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'exportType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'foreignCurrency',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'foreignCurrency',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> foreignCurrencyEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'foreignCurrency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'foreignCurrency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> foreignCurrencyLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'foreignCurrency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> foreignCurrencyBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'foreignCurrency',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'foreignCurrency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> foreignCurrencyEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'foreignCurrency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> foreignCurrencyContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'foreignCurrency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> foreignCurrencyMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'foreignCurrency',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'foreignCurrency',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'foreignCurrency',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyAmountIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'foreignCurrencyAmount',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyAmountIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'foreignCurrencyAmount',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyAmountEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'foreignCurrencyAmount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyAmountGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'foreignCurrencyAmount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyAmountLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'foreignCurrencyAmount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      foreignCurrencyAmountBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'foreignCurrencyAmount',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -2501,6 +3920,158 @@ extension InvoiceQueryFilter
   }
 
   QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      placeOfDispatchIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'placeOfDispatch',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      placeOfDispatchIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'placeOfDispatch',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> placeOfDispatchEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'placeOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      placeOfDispatchGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'placeOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> placeOfDispatchLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'placeOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> placeOfDispatchBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'placeOfDispatch',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      placeOfDispatchStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'placeOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> placeOfDispatchEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'placeOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> placeOfDispatchContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'placeOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> placeOfDispatchMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'placeOfDispatch',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      placeOfDispatchIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'placeOfDispatch',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      placeOfDispatchIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'placeOfDispatch',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
       placeOfSupplyStateEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -2636,6 +4207,888 @@ extension InvoiceQueryFilter
     });
   }
 
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'portCode',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'portCode',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'portCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'portCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'portCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'portCode',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'portCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'portCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'portCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'portCode',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'portCode',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portCodeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'portCode',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'portName',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'portName',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'portName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'portName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'portName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'portName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'portName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'portName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'portName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'portName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'portName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> portNameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'portName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> rcmCollectedEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'rcmCollected',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> rcmCollectedGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'rcmCollected',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> rcmCollectedLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'rcmCollected',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> rcmCollectedBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'rcmCollected',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'shippingBillDate',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'shippingBillDate',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> shippingBillDateEqualTo(
+      DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'shippingBillDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'shippingBillDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'shippingBillDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> shippingBillDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'shippingBillDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'shippingBillNumber',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'shippingBillNumber',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'shippingBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'shippingBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'shippingBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'shippingBillNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'shippingBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'shippingBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'shippingBillNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'shippingBillNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'shippingBillNumber',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      shippingBillNumberIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'shippingBillNumber',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      stateOfDispatchIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'stateOfDispatch',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      stateOfDispatchIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'stateOfDispatch',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> stateOfDispatchEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'stateOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      stateOfDispatchGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'stateOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> stateOfDispatchLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'stateOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> stateOfDispatchBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'stateOfDispatch',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      stateOfDispatchStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'stateOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> stateOfDispatchEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'stateOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> stateOfDispatchContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'stateOfDispatch',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> stateOfDispatchMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'stateOfDispatch',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      stateOfDispatchIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'stateOfDispatch',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      stateOfDispatchIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'stateOfDispatch',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subSupplyTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'subSupplyType',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      subSupplyTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'subSupplyType',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subSupplyTypeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'subSupplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      subSupplyTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'subSupplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subSupplyTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'subSupplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subSupplyTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'subSupplyType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subSupplyTypeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'subSupplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subSupplyTypeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'subSupplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subSupplyTypeContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'subSupplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subSupplyTypeMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'subSupplyType',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subSupplyTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'subSupplyType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      subSupplyTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'subSupplyType',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Invoice, Invoice, QAfterFilterCondition> subtotalEqualTo(
     double value, {
     double epsilon = Query.epsilon,
@@ -2694,6 +5147,152 @@ extension InvoiceQueryFilter
         upper: upper,
         includeUpper: includeUpper,
         epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'supplyType',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'supplyType',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'supplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'supplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'supplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'supplyType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'supplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'supplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'supplyType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'supplyType',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'supplyType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> supplyTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'supplyType',
+        value: '',
       ));
     });
   }
@@ -3075,6 +5674,456 @@ extension InvoiceQueryFilter
       ));
     });
   }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'transporterId',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      transporterIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'transporterId',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'transporterId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      transporterIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'transporterId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'transporterId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'transporterId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'transporterId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'transporterId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterIdContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'transporterId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'transporterId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'transporterId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      transporterIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'transporterId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      transporterNameIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'transporterName',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      transporterNameIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'transporterName',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterNameEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'transporterName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      transporterNameGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'transporterName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterNameLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'transporterName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterNameBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'transporterName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      transporterNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'transporterName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'transporterName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterNameContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'transporterName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> transporterNameMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'transporterName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      transporterNameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'transporterName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      transporterNameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'transporterName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> vehicleNumberIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'vehicleNumber',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      vehicleNumberIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'vehicleNumber',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> vehicleNumberEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'vehicleNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      vehicleNumberGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'vehicleNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> vehicleNumberLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'vehicleNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> vehicleNumberBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'vehicleNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> vehicleNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'vehicleNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> vehicleNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'vehicleNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> vehicleNumberContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'vehicleNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> vehicleNumberMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'vehicleNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition> vehicleNumberIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'vehicleNumber',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterFilterCondition>
+      vehicleNumberIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'vehicleNumber',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension InvoiceQueryObject
@@ -3103,6 +6152,30 @@ extension InvoiceQuerySortBy on QueryBuilder<Invoice, Invoice, QSortBy> {
     });
   }
 
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByDistance() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'distance', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByDistanceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'distance', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByDocumentType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'documentType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByDocumentTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'documentType', Sort.desc);
+    });
+  }
+
   QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByDueAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dueAmount', Sort.asc);
@@ -3124,6 +6197,103 @@ extension InvoiceQuerySortBy on QueryBuilder<Invoice, Invoice, QSortBy> {
   QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByEInvoiceIrnDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'eInvoiceIrn', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByEwayBillDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByEwayBillDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByEwayBillNumber() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillNumber', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByEwayBillNumberDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillNumber', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByEwayBillValidUpto() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillValidUpto', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByEwayBillValidUptoDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillValidUpto', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByExchangeRate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exchangeRate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByExchangeRateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exchangeRate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByExportCountry() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exportCountry', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByExportCountryDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exportCountry', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByExportType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exportType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByExportTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exportType', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByForeignCurrency() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'foreignCurrency', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByForeignCurrencyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'foreignCurrency', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByForeignCurrencyAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'foreignCurrencyAmount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy>
+      sortByForeignCurrencyAmountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'foreignCurrencyAmount', Sort.desc);
     });
   }
 
@@ -3307,6 +6477,18 @@ extension InvoiceQuerySortBy on QueryBuilder<Invoice, Invoice, QSortBy> {
     });
   }
 
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByPlaceOfDispatch() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'placeOfDispatch', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByPlaceOfDispatchDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'placeOfDispatch', Sort.desc);
+    });
+  }
+
   QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByPlaceOfSupplyState() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'placeOfSupplyState', Sort.asc);
@@ -3319,6 +6501,90 @@ extension InvoiceQuerySortBy on QueryBuilder<Invoice, Invoice, QSortBy> {
     });
   }
 
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByPortCode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'portCode', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByPortCodeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'portCode', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByPortName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'portName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByPortNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'portName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByRcmCollected() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'rcmCollected', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByRcmCollectedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'rcmCollected', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByShippingBillDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'shippingBillDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByShippingBillDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'shippingBillDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByShippingBillNumber() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'shippingBillNumber', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByShippingBillNumberDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'shippingBillNumber', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByStateOfDispatch() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'stateOfDispatch', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByStateOfDispatchDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'stateOfDispatch', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortBySubSupplyType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subSupplyType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortBySubSupplyTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subSupplyType', Sort.desc);
+    });
+  }
+
   QueryBuilder<Invoice, Invoice, QAfterSortBy> sortBySubtotal() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'subtotal', Sort.asc);
@@ -3328,6 +6594,18 @@ extension InvoiceQuerySortBy on QueryBuilder<Invoice, Invoice, QSortBy> {
   QueryBuilder<Invoice, Invoice, QAfterSortBy> sortBySubtotalDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'subtotal', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortBySupplyType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'supplyType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortBySupplyTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'supplyType', Sort.desc);
     });
   }
 
@@ -3390,6 +6668,42 @@ extension InvoiceQuerySortBy on QueryBuilder<Invoice, Invoice, QSortBy> {
       return query.addSortBy(r'totalSgst', Sort.desc);
     });
   }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByTransporterId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transporterId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByTransporterIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transporterId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByTransporterName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transporterName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByTransporterNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transporterName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByVehicleNumber() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'vehicleNumber', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> sortByVehicleNumberDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'vehicleNumber', Sort.desc);
+    });
+  }
 }
 
 extension InvoiceQuerySortThenBy
@@ -3403,6 +6717,30 @@ extension InvoiceQuerySortThenBy
   QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByDiscountAmountDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'discountAmount', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByDistance() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'distance', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByDistanceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'distance', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByDocumentType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'documentType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByDocumentTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'documentType', Sort.desc);
     });
   }
 
@@ -3427,6 +6765,103 @@ extension InvoiceQuerySortThenBy
   QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByEInvoiceIrnDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'eInvoiceIrn', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByEwayBillDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByEwayBillDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByEwayBillNumber() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillNumber', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByEwayBillNumberDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillNumber', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByEwayBillValidUpto() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillValidUpto', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByEwayBillValidUptoDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ewayBillValidUpto', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByExchangeRate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exchangeRate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByExchangeRateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exchangeRate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByExportCountry() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exportCountry', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByExportCountryDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exportCountry', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByExportType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exportType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByExportTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'exportType', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByForeignCurrency() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'foreignCurrency', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByForeignCurrencyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'foreignCurrency', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByForeignCurrencyAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'foreignCurrencyAmount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy>
+      thenByForeignCurrencyAmountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'foreignCurrencyAmount', Sort.desc);
     });
   }
 
@@ -3622,6 +7057,18 @@ extension InvoiceQuerySortThenBy
     });
   }
 
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByPlaceOfDispatch() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'placeOfDispatch', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByPlaceOfDispatchDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'placeOfDispatch', Sort.desc);
+    });
+  }
+
   QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByPlaceOfSupplyState() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'placeOfSupplyState', Sort.asc);
@@ -3634,6 +7081,90 @@ extension InvoiceQuerySortThenBy
     });
   }
 
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByPortCode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'portCode', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByPortCodeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'portCode', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByPortName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'portName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByPortNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'portName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByRcmCollected() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'rcmCollected', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByRcmCollectedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'rcmCollected', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByShippingBillDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'shippingBillDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByShippingBillDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'shippingBillDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByShippingBillNumber() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'shippingBillNumber', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByShippingBillNumberDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'shippingBillNumber', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByStateOfDispatch() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'stateOfDispatch', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByStateOfDispatchDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'stateOfDispatch', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenBySubSupplyType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subSupplyType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenBySubSupplyTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subSupplyType', Sort.desc);
+    });
+  }
+
   QueryBuilder<Invoice, Invoice, QAfterSortBy> thenBySubtotal() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'subtotal', Sort.asc);
@@ -3643,6 +7174,18 @@ extension InvoiceQuerySortThenBy
   QueryBuilder<Invoice, Invoice, QAfterSortBy> thenBySubtotalDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'subtotal', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenBySupplyType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'supplyType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenBySupplyTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'supplyType', Sort.desc);
     });
   }
 
@@ -3705,6 +7248,42 @@ extension InvoiceQuerySortThenBy
       return query.addSortBy(r'totalSgst', Sort.desc);
     });
   }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByTransporterId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transporterId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByTransporterIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transporterId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByTransporterName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transporterName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByTransporterNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transporterName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByVehicleNumber() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'vehicleNumber', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QAfterSortBy> thenByVehicleNumberDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'vehicleNumber', Sort.desc);
+    });
+  }
 }
 
 extension InvoiceQueryWhereDistinct
@@ -3712,6 +7291,19 @@ extension InvoiceQueryWhereDistinct
   QueryBuilder<Invoice, Invoice, QDistinct> distinctByDiscountAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'discountAmount');
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByDistance() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'distance');
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByDocumentType(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'documentType', caseSensitive: caseSensitive);
     });
   }
 
@@ -3725,6 +7317,61 @@ extension InvoiceQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'eInvoiceIrn', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByEwayBillDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'ewayBillDate');
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByEwayBillNumber(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'ewayBillNumber',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByEwayBillValidUpto() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'ewayBillValidUpto');
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByExchangeRate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'exchangeRate');
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByExportCountry(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'exportCountry',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByExportType(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'exportType', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByForeignCurrency(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'foreignCurrency',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByForeignCurrencyAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'foreignCurrencyAmount');
     });
   }
 
@@ -3828,6 +7475,14 @@ extension InvoiceQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByPlaceOfDispatch(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'placeOfDispatch',
+          caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<Invoice, Invoice, QDistinct> distinctByPlaceOfSupplyState(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -3836,9 +7491,66 @@ extension InvoiceQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByPortCode(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'portCode', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByPortName(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'portName', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByRcmCollected() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'rcmCollected');
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByShippingBillDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'shippingBillDate');
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByShippingBillNumber(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'shippingBillNumber',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByStateOfDispatch(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'stateOfDispatch',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctBySubSupplyType(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'subSupplyType',
+          caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<Invoice, Invoice, QDistinct> distinctBySubtotal() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'subtotal');
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctBySupplyType(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'supplyType', caseSensitive: caseSensitive);
     });
   }
 
@@ -3872,6 +7584,30 @@ extension InvoiceQueryWhereDistinct
       return query.addDistinctBy(r'totalSgst');
     });
   }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByTransporterId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'transporterId',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByTransporterName(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'transporterName',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Invoice, Invoice, QDistinct> distinctByVehicleNumber(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'vehicleNumber',
+          caseSensitive: caseSensitive);
+    });
+  }
 }
 
 extension InvoiceQueryProperty
@@ -3888,6 +7624,18 @@ extension InvoiceQueryProperty
     });
   }
 
+  QueryBuilder<Invoice, double?, QQueryOperations> distanceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'distance');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> documentTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'documentType');
+    });
+  }
+
   QueryBuilder<Invoice, double, QQueryOperations> dueAmountProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'dueAmount');
@@ -3897,6 +7645,56 @@ extension InvoiceQueryProperty
   QueryBuilder<Invoice, String?, QQueryOperations> eInvoiceIrnProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'eInvoiceIrn');
+    });
+  }
+
+  QueryBuilder<Invoice, DateTime?, QQueryOperations> ewayBillDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'ewayBillDate');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> ewayBillNumberProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'ewayBillNumber');
+    });
+  }
+
+  QueryBuilder<Invoice, DateTime?, QQueryOperations>
+      ewayBillValidUptoProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'ewayBillValidUpto');
+    });
+  }
+
+  QueryBuilder<Invoice, double?, QQueryOperations> exchangeRateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'exchangeRate');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> exportCountryProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'exportCountry');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> exportTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'exportType');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> foreignCurrencyProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'foreignCurrency');
+    });
+  }
+
+  QueryBuilder<Invoice, double?, QQueryOperations>
+      foreignCurrencyAmountProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'foreignCurrencyAmount');
     });
   }
 
@@ -3997,15 +7795,71 @@ extension InvoiceQueryProperty
     });
   }
 
+  QueryBuilder<Invoice, String?, QQueryOperations> placeOfDispatchProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'placeOfDispatch');
+    });
+  }
+
   QueryBuilder<Invoice, String, QQueryOperations> placeOfSupplyStateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'placeOfSupplyState');
     });
   }
 
+  QueryBuilder<Invoice, String?, QQueryOperations> portCodeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'portCode');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> portNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'portName');
+    });
+  }
+
+  QueryBuilder<Invoice, double, QQueryOperations> rcmCollectedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'rcmCollected');
+    });
+  }
+
+  QueryBuilder<Invoice, DateTime?, QQueryOperations>
+      shippingBillDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'shippingBillDate');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations>
+      shippingBillNumberProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'shippingBillNumber');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> stateOfDispatchProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'stateOfDispatch');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> subSupplyTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'subSupplyType');
+    });
+  }
+
   QueryBuilder<Invoice, double, QQueryOperations> subtotalProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'subtotal');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> supplyTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'supplyType');
     });
   }
 
@@ -4036,6 +7890,24 @@ extension InvoiceQueryProperty
   QueryBuilder<Invoice, double, QQueryOperations> totalSgstProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'totalSgst');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> transporterIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'transporterId');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> transporterNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'transporterName');
+    });
+  }
+
+  QueryBuilder<Invoice, String?, QQueryOperations> vehicleNumberProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'vehicleNumber');
     });
   }
 }

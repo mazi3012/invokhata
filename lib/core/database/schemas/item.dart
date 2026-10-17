@@ -33,6 +33,8 @@ class Item {
   String unit = 'Pcs'; // e.g., Pcs, Kg, Ltr, Mtr, Box, etc.
 
   bool isGst = true;
+  double cessRate = 0.0; // Cess rate percentage
+  double cessAmount = 0.0; // Cess amount calculated
   double gstRate = 18.0; // 0, 0.25, 3, 5, 12, 18, 28, 40
   String taxRateName = 'GST@18%';
 }

@@ -27,7 +27,7 @@ class GstReportsScreen extends ConsumerWidget {
 
     if (isDesktop) {
       return ResponsiveScaffold(
-        currentIndex: 6,
+        currentIndex: 7,
         body: Row(
           children: [
             SizedBox(
@@ -85,7 +85,7 @@ class GstReportsScreen extends ConsumerWidget {
       );
     } else {
       return ResponsiveScaffold(
-        currentIndex: 6,
+        currentIndex: 7,
         mobileIndex: -1,
         title: 'GST Reports',
         showBackButton: true,

@@ -6,7 +6,10 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../../../../core/database/schemas/purchase.dart';
 import '../../../../core/services/settings_service.dart';
+import '../../../../core/utils/einvoice_generator.dart';
+import '../../../../core/utils/einvoice_schema.dart';
 import '../../../../core/utils/india_gst.dart';
 import 'gst_report_models.dart';
 import 'gst_report_validator.dart';
@@ -39,6 +42,51 @@ class GstExportException implements Exception {
 
 class GstExportService {
   const GstExportService._();
+  static String exportEInvoice(EInvoiceSchema schema) {
+    final EInvoiceGenerator generator = EInvoiceGenerator();
+    return generator.generateJson(schema);
+  }
+
+  static List<String> exportBatchEInvoices(List<EInvoiceSchema> schemas) {
+    return schemas.map(exportEInvoice).toList();
+  }
+  static Map<String, dynamic> generateRCMReportData(double rcmLiability, double rcmITC) {
+    return {
+      'rcmLiability': rcmLiability,
+      'rcmITCClaimed': rcmITC,
+    };
+  }
+
+  static Map<String, dynamic> gstr1Map(GstReportData data, AppSettings settings) =>
+      _gstr1(data, settings);
+
+  static Map<String, dynamic> generateRCMReport(double liability, double itc) {
+    return {
+      'liabilityUnderRCM': liability,
+      'itcOnRCM': itc,
+    };
+  }
+
+  static Future<Map<String, dynamic>> generateRCMSummary(
+      List<Purchase> purchases) async {
+    double totalRCMLiability = 0.0;
+    double totalRCMCredit = 0.0;
+
+    for (final purchase in purchases) {
+      if (purchase.isReverseCharge && !purchase.rcmPaid) {
+        totalRCMLiability += purchase.rcmTaxAmount;
+      }
+
+      if (purchase.rcmPaid) {
+        totalRCMCredit += purchase.rcmTaxAmount;
+      }
+    }
+
+    return generateRCMReport(totalRCMLiability, totalRCMCredit);
+  }
+  static Map<String, dynamic> gstr3bMap(GstReportData data, AppSettings settings) =>
+      _gstr3b(data, settings);
+
 
   static Future<Uint8List> generatePdfBytes({
     required GstReportData data,
@@ -216,6 +264,93 @@ class GstExportService {
       }
     }
 
+    final cdnr = <Map<String, dynamic>>[];
+    final cdnur = <Map<String, dynamic>>[];
+
+    for (final document in data.creditNotes) {
+      final isCredit = document.noteType != 'debit_note';
+      final noteTypeChar = isCredit ? 'C' : 'D';
+      final note = {
+        'ntty': noteTypeChar,
+        'nt_num': document.documentNumber,
+        'nt_dt': _gstDate(document.documentDate),
+        'p_gst': 'N',
+        'val': _round(document.documentTotal),
+        'pos': document.placeOfSupplyCode ?? '',
+        'rchrg': document.isReverseCharge ? 'Y' : 'N',
+        'inv_typ': 'R',
+        'inum': document.originalInvoiceNumber ?? '',
+        'idt': document.originalInvoiceDate != null
+            ? _gstDate(document.originalInvoiceDate!)
+            : '',
+        'itms': document.lines.map(_itemJson).toList(),
+      };
+
+      if (document.isB2B) {
+        cdnr.add({
+          'ctin': document.partyGstin,
+          'nt': [note],
+        });
+      } else {
+        cdnur.add({
+          'typ': (document.isInterState && document.documentTotal >= 100000)
+              ? 'B2CL'
+              : 'B2CS',
+          'ntty': noteTypeChar,
+          'nt_num': document.documentNumber,
+          'nt_dt': _gstDate(document.documentDate),
+          'p_gst': 'N',
+          'val': _round(document.documentTotal),
+          'pos': document.placeOfSupplyCode ?? '',
+          'inum': document.originalInvoiceNumber ?? '',
+          'idt': document.originalInvoiceDate != null
+              ? _gstDate(document.originalInvoiceDate!)
+              : '',
+          'itms': document.lines.map(_itemJson).toList(),
+        });
+      }
+    }
+
+    final docIssueList = <Map<String, dynamic>>[
+      {
+        'doc_num': 1,
+        'from': data.sales.isEmpty ? '' : data.sales.last.documentNumber,
+        'to': data.sales.isEmpty ? '' : data.sales.first.documentNumber,
+        'totnum': data.sales.length,
+        'cancel': 0,
+        'net_issue': data.sales.length,
+      },
+    ];
+
+    if (data.creditNotes.isNotEmpty) {
+      final cnList = data.creditNotes
+          .where((n) => n.noteType != 'debit_note')
+          .toList();
+      if (cnList.isNotEmpty) {
+        docIssueList.add({
+          'doc_num': 4, // GST doc_num 4 is Credit Note
+          'from': cnList.last.documentNumber,
+          'to': cnList.first.documentNumber,
+          'totnum': cnList.length,
+          'cancel': 0,
+          'net_issue': cnList.length,
+        });
+      }
+      final dnList = data.creditNotes
+          .where((n) => n.noteType == 'debit_note')
+          .toList();
+      if (dnList.isNotEmpty) {
+        docIssueList.add({
+          'doc_num': 5, // GST doc_num 5 is Debit Note
+          'from': dnList.last.documentNumber,
+          'to': dnList.first.documentNumber,
+          'totnum': dnList.length,
+          'cancel': 0,
+          'net_issue': dnList.length,
+        });
+      }
+    }
+
     return {
       'gstin': normalizeGstin(settings.taxId),
       'fp': data.endDate.month.toString().padLeft(2, '0') +
@@ -224,6 +359,8 @@ class GstExportService {
       'b2b': b2b,
       'b2cl': b2cl,
       'b2cs': b2cs,
+      'cdnr': cdnr,
+      'cdnur': cdnur,
       'exp': exp,
       'hsn': {
         'data': data.hsnSummary
@@ -242,19 +379,10 @@ class GstExportService {
             .toList(),
       },
       'doc_issue': {
-        'doc_det': [
-          {
-            'doc_num': 1,
-            'from': data.sales.isEmpty ? '' : data.sales.last.documentNumber,
-            'to': data.sales.isEmpty ? '' : data.sales.first.documentNumber,
-            'totnum': data.sales.length,
-            'cancel': 0,
-            'net_issue': data.sales.length,
-          },
-        ],
+        'doc_det': docIssueList,
       },
       '_notes': [
-        'Credit/debit notes and amendments are not modeled in the local database.',
+        'Credit/debit notes (CDNR & CDNUR) are included from the local database.',
         'Validate this payload against the current GST Portal offline schema before filing.',
       ],
     };

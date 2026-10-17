@@ -3,6 +3,7 @@ import '../../../core/database/isar_service.dart';
 import '../../../core/database/schemas/invoice.dart';
 import '../../../core/database/schemas/item.dart';
 import '../../../core/database/schemas/party.dart';
+import '../../../core/services/settings_service.dart';
 
 /// Thrown when a sale line-item exceeds the item's available stock.
 class InsufficientStockException implements Exception {
@@ -21,25 +22,36 @@ class InsufficientStockException implements Exception {
 class POSRepository {
   final Isar _isar = IsarService.isar;
 
-  /// Generates the next invoice number: INV-YYYY-NNNN
-  ///
-  /// Mirrors the purchase flow's sequential `PUR-YYYY-NNNN` numbering. It uses
-  /// an indexed prefix query + descending sort to fetch only the highest
-  /// existing sequence for the current calendar year, avoiding a full-table scan
-  /// that would stall checkout at 20k+ invoices.
-  Future<String> nextInvoiceNumber() async {
+  /// Generates the next invoice number based on settings or default INV-YYYY-NNNN
+  Future<String> nextInvoiceNumber([AppSettings? settings]) async {
+    final s = settings ?? AppSettings();
     final year = DateTime.now().year;
-    final prefix = 'INV-$year-';
+    final prefix = s.invoicePrefix.isNotEmpty ? s.invoicePrefix : 'INV';
+    final searchPrefix = '$prefix-$year-';
 
-    // Fetch only the single highest invoice sequence for this year.
     final latest = await _isar.invoices
         .filter()
-        .invoiceNumberStartsWith(prefix)
+        .invoiceNumberStartsWith(searchPrefix)
         .sortByInvoiceSeqDesc()
         .findFirst();
 
     final seq = (latest?.invoiceSeq ?? 0) + 1;
-    return '$prefix${seq.toString().padLeft(4, '0')}';
+    final paddedSeq =
+        seq.toString().padLeft(s.invoicePadLength > 0 ? s.invoicePadLength : 4, '0');
+
+    final components = <String>[];
+    if (s.invoicePrefix.isNotEmpty) {
+      components.add(s.invoicePrefix);
+    }
+    if (s.invoiceIncludeYear) {
+      components.add(year.toString());
+    }
+    components.add(paddedSeq);
+    if (s.invoiceSuffix.isNotEmpty) {
+      components.add(s.invoiceSuffix);
+    }
+
+    return components.join(s.invoiceSeparator);
   }
 
   Future<void> createInvoiceAndProcessSale({

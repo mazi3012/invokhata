@@ -757,7 +757,7 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '${item.quantity} ${item.unit ?? 'Pcs'} \u00d7 \u20b9${item.rate.toStringAsFixed(2)}',
+                        '${item.quantity} ${item.unit} × ₹${item.rate.toStringAsFixed(2)}',
                         style: const TextStyle(
                           fontSize: 12,
                           color: AppColors.textSecondary,

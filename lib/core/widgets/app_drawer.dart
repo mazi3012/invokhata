@@ -6,6 +6,7 @@ import '../../features/pos/presentation/screens/all_invoices_screen.dart';
 import '../../features/inventory/presentation/screens/inventory_screen.dart';
 import '../../features/khata/presentation/screens/khata_screen.dart';
 import '../../features/purchase/presentation/screens/all_purchases_screen.dart';
+import '../../features/credit_notes/presentation/screens/credit_notes_screen.dart';
 import '../../features/reports/presentation/screens/gst_reports_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
 
@@ -89,6 +90,11 @@ class AppDrawer extends StatelessWidget {
             icon: Icons.people_alt_outlined,
             title: 'Khata / Customers',
             onTap: () => _push(context, const KhataScreen()),
+          ),
+          _DrawerTile(
+            icon: Icons.note_alt_outlined,
+            title: 'Credit & Debit Notes',
+            onTap: () => _push(context, const CreditNotesScreen()),
           ),
           _DrawerTile(
             icon: Icons.assessment_outlined,

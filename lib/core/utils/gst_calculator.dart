@@ -62,3 +62,21 @@ class GstCalculator {
     );
   }
 }
+class CessCalculator {
+  // Calculate cess amount based on taxable value and cess rate
+  static double calculateCess(double taxableValue, double cessRate) {
+    return taxableValue * (cessRate / 100);
+  }
+}
+
+class CompositionTaxCalculator {
+  // Calculate composition scheme tax based on turnover
+  static double calculateCompositionTax(double turnover, double taxRate) {
+    return turnover * (taxRate / 100);
+  }
+
+  // Validate composition scheme eligibility based on annual turnover
+  static bool isEligibleForComposition(double annualTurnover, double threshold) {
+    return annualTurnover <= threshold;
+  }
+}

@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import '../../../../core/database/schemas/invoice.dart';
 import '../../../../core/database/schemas/purchase.dart';
+import '../../../../core/database/schemas/credit_note.dart';
 import '../../../../core/utils/india_gst.dart';
 
 enum GstReportType {
@@ -177,6 +178,9 @@ class GstDocumentRecord {
   final double documentCess;
   final double documentTotal;
   final String? sourceId;
+  final String? originalInvoiceNumber;
+  final DateTime? originalInvoiceDate;
+  final String? noteType;
 
   const GstDocumentRecord({
     required this.documentNumber,
@@ -199,13 +203,16 @@ class GstDocumentRecord {
     required this.documentCess,
     required this.documentTotal,
     this.sourceId,
+    this.originalInvoiceNumber,
+    this.originalInvoiceDate,
+    this.noteType,
   });
 
   double get totalTax =>
       documentCgst + documentSgst + documentIgst + documentCess;
 
   bool get isB2B =>
-      direction == GstRecordDirection.sale &&
+      (direction == GstRecordDirection.sale || noteType != null) &&
       partyGstin != null &&
       partyGstin!.trim().isNotEmpty;
 
@@ -301,9 +308,11 @@ class GstReportData {
   final DateTime endDate;
   final List<GstDocumentRecord> sales;
   final List<GstDocumentRecord> purchases;
+  final List<GstDocumentRecord> creditNotes;
   final List<GstDocumentRecord> filteredDocuments;
   final GstTaxSummary salesSummary;
   final GstTaxSummary purchaseSummary;
+  final GstTaxSummary creditNoteSummary;
   final List<GstHsnSummary> hsnSummary;
 
   const GstReportData({
@@ -311,9 +320,11 @@ class GstReportData {
     required this.endDate,
     required this.sales,
     required this.purchases,
+    this.creditNotes = const [],
     required this.filteredDocuments,
     required this.salesSummary,
     required this.purchaseSummary,
+    this.creditNoteSummary = const GstTaxSummary.zero(),
     required this.hsnSummary,
   });
 
@@ -322,13 +333,15 @@ class GstReportData {
     required this.endDate,
   })  : sales = const [],
         purchases = const [],
+        creditNotes = const [],
         filteredDocuments = const [],
         salesSummary = const GstTaxSummary.zero(),
         purchaseSummary = const GstTaxSummary.zero(),
+        creditNoteSummary = const GstTaxSummary.zero(),
         hsnSummary = const [];
 
   List<GstDocumentRecord> get allDocuments =>
-      <GstDocumentRecord>[...sales, ...purchases];
+      <GstDocumentRecord>[...sales, ...purchases, ...creditNotes];
 
   int get b2bCount => sales.where((document) => document.isB2B).length;
   int get b2cCount => sales.where((document) => !document.isB2B).length;
@@ -376,6 +389,7 @@ class GstReportData {
     required DateTime endDate,
     required List<Invoice> invoices,
     required List<Purchase> purchases,
+    List<CreditNote> creditNotes = const [],
     String searchQuery = '',
   }) {
     final sales = invoices
@@ -390,17 +404,77 @@ class GstReportData {
             (document) => _inRange(document.documentDate, startDate, endDate))
         .where((document) => _matchesSearch(document, searchQuery))
         .toList(growable: false);
+    final creditNoteRecords = creditNotes
+        .map(_creditNoteRecord)
+        .where(
+            (document) => _inRange(document.documentDate, startDate, endDate))
+        .where((document) => _matchesSearch(document, searchQuery))
+        .toList(growable: false);
 
     return GstReportData(
       startDate: startDate,
       endDate: endDate,
       sales: sales,
       purchases: purchaseRecords,
-      filteredDocuments: <GstDocumentRecord>[...sales, ...purchaseRecords]
+      creditNotes: creditNoteRecords,
+      filteredDocuments: <GstDocumentRecord>[...sales, ...purchaseRecords, ...creditNoteRecords]
         ..sort((a, b) => b.documentDate.compareTo(a.documentDate)),
       salesSummary: _summarize(sales),
       purchaseSummary: _summarize(purchaseRecords),
+      creditNoteSummary: _summarize(creditNoteRecords),
       hsnSummary: _summarizeHsn(sales),
+    );
+  }
+
+  static GstDocumentRecord _creditNoteRecord(CreditNote note) {
+    final lines = note.items.map((line) {
+      final qty = _safe(line.quantity);
+      final price = _safe(line.unitPrice);
+      final rawTaxable = _safe(line.taxableAmount);
+      final taxable = rawTaxable > 0 ? rawTaxable : _safe(price * qty);
+      return GstLineRecord(
+        itemId: line.itemId?.toString(),
+        description: line.itemName?.trim() ?? '',
+        hsnSac: _clean(line.hsnCode),
+        unit: line.unit ?? 'Nos',
+        quantity: qty,
+        unitPrice: price,
+        taxableValue: taxable,
+        gstRate: _safe(line.gstRate),
+        cgst: _safe(line.cgstAmount),
+        sgst: _safe(line.sgstAmount),
+        igst: _safe(line.igstAmount),
+        cessRate: _safe(line.cessRate),
+        cess: _safe(line.cessAmount),
+      );
+    }).toList(growable: false);
+
+    return GstDocumentRecord(
+      documentNumber: note.noteNumber,
+      documentDate: note.noteDate,
+      direction: note.noteType == 'debit_note'
+          ? GstRecordDirection.purchase
+          : GstRecordDirection.sale,
+      partyName: note.partyName.trim(),
+      partyGstin: _clean(note.partyGstin),
+      partyState: _clean(note.partyState),
+      placeOfSupplyState: _clean(note.placeOfSupplyState),
+      taxMode: note.taxMode,
+      invoiceType: note.noteType,
+      isGstDocument: note.isGstNote,
+      isReverseCharge: false,
+      eInvoiceIrn: null,
+      lines: lines,
+      documentTaxableValue: _safe(note.subtotal),
+      documentCgst: _safe(note.totalCgst),
+      documentSgst: _safe(note.totalSgst),
+      documentIgst: _safe(note.totalIgst),
+      documentCess: lines.fold<double>(0.0, (sum, l) => sum + l.cess),
+      documentTotal: _safe(note.totalAmount),
+      sourceId: note.id.toString(),
+      originalInvoiceNumber: note.originalInvoiceNumber,
+      originalInvoiceDate: note.originalInvoiceDate,
+      noteType: note.noteType,
     );
   }
 
@@ -464,7 +538,7 @@ class GstReportData {
         itemId: line.itemId?.toString(),
         description: line.itemName?.trim() ?? '',
         hsnSac: _clean(line.hsnCode),
-        unit: line.unit ?? 'Nos',
+        unit: line.unit,
         quantity: qty,
         unitPrice: rate,
         taxableValue: taxable,

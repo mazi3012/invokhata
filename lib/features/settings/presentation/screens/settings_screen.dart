@@ -128,7 +128,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveScaffold(
-      currentIndex: 7,
+      currentIndex: 8,
       title: 'Business & App Settings',
       body: Center(
         child: Container(

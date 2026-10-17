@@ -25,11 +25,11 @@ class PurchaseRepository {
         }
       }
 
-      // 3. If linked to a party, reduce their outstanding balance by totalAmount
-      if (purchase.partyId != null && purchase.totalAmount > 0) {
+      // 3. If linked to a party, reduce their outstanding balance by grandTotal
+      if (purchase.partyId != null && purchase.grandTotal > 0) {
         final party = await _isar.partys.get(purchase.partyId!);
         if (party != null) {
-          party.outstandingBalance -= purchase.totalAmount;
+          party.outstandingBalance -= purchase.grandTotal;
           if (party.outstandingBalance < 0) party.outstandingBalance = 0;
           await _isar.partys.put(party);
         }
@@ -63,10 +63,10 @@ class PurchaseRepository {
       }
 
       // Reverse party outstanding change
-      if (purchase.partyId != null && purchase.totalAmount > 0) {
+      if (purchase.partyId != null && purchase.grandTotal > 0) {
         final party = await _isar.partys.get(purchase.partyId!);
         if (party != null) {
-          party.outstandingBalance += purchase.totalAmount;
+          party.outstandingBalance += purchase.grandTotal;
           await _isar.partys.put(party);
         }
       }

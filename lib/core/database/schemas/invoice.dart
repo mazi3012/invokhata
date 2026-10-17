@@ -45,8 +45,32 @@ class Invoice {
   String placeOfSupplyState = '';
   String taxMode = 'intra_state';
   bool isReverseCharge = false;
+  double rcmCollected = 0.0;    // RCM collected from customers
   String invoiceType = 'tax_invoice';
   String? eInvoiceIrn;
+  String? ewayBillNumber;
+  DateTime? ewayBillDate;
+  DateTime? ewayBillValidUpto;
+
+  String? transporterName;
+  String? transporterId;
+  String? vehicleNumber;
+  String? placeOfDispatch;
+  String? stateOfDispatch;
+  double? distance;
+
+  String? supplyType;
+  String? subSupplyType;
+  String? exportType;           // WOP, WOP+E, CBW
+  String? shippingBillNumber;
+  DateTime? shippingBillDate;
+  String? portCode;
+  String? portName;
+  String? exportCountry;
+  double? foreignCurrencyAmount;
+  String? foreignCurrency;      // USD, EUR, etc.
+  double? exchangeRate;
+  String? documentType;
 
   List<InvoiceLineItem> items = [];
 
