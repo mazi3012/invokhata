@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The native splash used to be a blue gradient. It now uses a solid white
+         background (@android:color/white) with the centered InvoKhata logo
+         (@mipmap/invokhata_logo), so these colors are kept here only for
+         reference and are not referenced by the current splash. -->
+    <color name="invokhata_splash_bg_top">#4A90D9</color>
+    <color name="invokhata_splash_bg_bottom">#2E6BA8</color>
+    <color name="invokhata_splash_bg">#4A90D9</color>
+</resources>
