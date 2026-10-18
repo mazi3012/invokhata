@@ -1,19 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/database/schemas/purchase.dart';
+import '../../../dashboard/presentation/providers/dashboard_provider.dart';
 import '../../data/purchase_repository.dart';
 
 final purchaseRepositoryProvider = Provider((ref) => PurchaseRepository());
 
 final purchaseProvider =
-    StateNotifierProvider<PurchaseNotifier, AsyncValue<List<Purchase>>>(
-        (ref) {
-  return PurchaseNotifier(ref.watch(purchaseRepositoryProvider));
+    StateNotifierProvider<PurchaseNotifier, AsyncValue<List<Purchase>>>((ref) {
+  return PurchaseNotifier(ref, ref.watch(purchaseRepositoryProvider));
 });
 
 class PurchaseNotifier extends StateNotifier<AsyncValue<List<Purchase>>> {
+  final Ref _ref;
   final PurchaseRepository _repository;
 
-  PurchaseNotifier(this._repository) : super(const AsyncValue.loading()) {
+  PurchaseNotifier(this._ref, this._repository) : super(const AsyncValue.loading()) {
     loadPurchases();
   }
 
@@ -27,12 +28,15 @@ class PurchaseNotifier extends StateNotifier<AsyncValue<List<Purchase>>> {
     }
   }
 
-  Future<void> addPurchase(Purchase purchase) async {
+  Future<bool> addPurchase(Purchase purchase) async {
     try {
       await _repository.createPurchaseAndProcess(purchase: purchase);
       await loadPurchases();
+      _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
+      return true;
     } catch (e, st) {
       state = AsyncValue.error(e, st);
+      return false;
     }
   }
 
@@ -40,6 +44,7 @@ class PurchaseNotifier extends StateNotifier<AsyncValue<List<Purchase>>> {
     try {
       await _repository.deletePurchase(id);
       await loadPurchases();
+      _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }

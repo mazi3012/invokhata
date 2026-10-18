@@ -1,18 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/database/schemas/item.dart';
+import '../../../dashboard/presentation/providers/dashboard_provider.dart';
 import '../../data/item_repository.dart';
 
 final inventoryRepositoryProvider = Provider((ref) => ItemRepository());
 
 final inventoryProvider =
     StateNotifierProvider<InventoryNotifier, AsyncValue<List<Item>>>((ref) {
-  return InventoryNotifier(ref.watch(inventoryRepositoryProvider));
+  return InventoryNotifier(ref, ref.watch(inventoryRepositoryProvider));
 });
 
 class InventoryNotifier extends StateNotifier<AsyncValue<List<Item>>> {
+  final Ref _ref;
   final ItemRepository _repository;
 
-  InventoryNotifier(this._repository) : super(const AsyncValue.loading()) {
+  InventoryNotifier(this._ref, this._repository) : super(const AsyncValue.loading()) {
     loadItems();
   }
 
@@ -32,6 +34,7 @@ class InventoryNotifier extends StateNotifier<AsyncValue<List<Item>>> {
     try {
       await _repository.saveItem(item);
       await loadItems();
+      _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
       return true;
     } catch (e, st) {
       state = AsyncValue.error(e, st);
@@ -45,6 +48,7 @@ class InventoryNotifier extends StateNotifier<AsyncValue<List<Item>>> {
     try {
       await _repository.saveItem(item);
       await loadItems();
+      _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
       return true;
     } catch (e, st) {
       state = AsyncValue.error(e, st);
@@ -59,6 +63,7 @@ class InventoryNotifier extends StateNotifier<AsyncValue<List<Item>>> {
     try {
       await _repository.deleteItem(id);
       await loadItems();
+      _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
       return true;
     } catch (e, st) {
       state = AsyncValue.error(e, st);

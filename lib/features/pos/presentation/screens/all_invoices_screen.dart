@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/database/schemas/invoice.dart';
 import '../../../../core/utils/pdf_preview_screen.dart';
 import '../../../../core/widgets/responsive_scaffold.dart';
+import '../../../dashboard/presentation/providers/dashboard_provider.dart';
 import '../../data/pos_repository.dart';
 
-class AllInvoicesScreen extends StatefulWidget {
+class AllInvoicesScreen extends ConsumerStatefulWidget {
   const AllInvoicesScreen({super.key});
 
   @override
-  State<AllInvoicesScreen> createState() => _AllInvoicesScreenState();
+  ConsumerState<AllInvoicesScreen> createState() => _AllInvoicesScreenState();
 }
 
-class _AllInvoicesScreenState extends State<AllInvoicesScreen> {
+class _AllInvoicesScreenState extends ConsumerState<AllInvoicesScreen> {
   late Future<List<Invoice>> _invoicesFuture;
 
   @override
@@ -62,6 +64,7 @@ class _AllInvoicesScreenState extends State<AllInvoicesScreen> {
 
   Future<void> _deleteInvoice(int id) async {
     await POSRepository().deleteInvoice(id);
+    ref.read(lastUpdateProvider.notifier).state = DateTime.now();
     if (mounted) {
       setState(() {
         _loadInvoices();

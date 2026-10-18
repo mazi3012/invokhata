@@ -43,4 +43,18 @@ class IsarService {
       isar = Isar.getInstance()!;
     }
   }
+
+  static Future<void> clearAll() async {
+    await isar.writeTxn(() async {
+      await isar.items.clear();
+      await isar.partys.clear();
+      await isar.invoices.clear();
+      await isar.purchases.clear();
+      await isar.eInvoices.clear();
+      await isar.eWayBills.clear();
+      await isar.creditNotes.clear();
+      await isar.tdsEntrys.clear();
+      await isar.tcsEntrys.clear();
+    });
+  }
 }

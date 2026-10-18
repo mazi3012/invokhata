@@ -9,6 +9,7 @@ import '../../../../core/widgets/app_header.dart';
 import '../../../../features/khata/presentation/providers/party_provider.dart';
 import '../providers/purchase_provider.dart';
 import 'add_purchase_item_screen.dart';
+import '../../../../features/dashboard/presentation/providers/dashboard_provider.dart';
 
 class PurchaseScreen extends ConsumerStatefulWidget {
   const PurchaseScreen({super.key});
@@ -160,15 +161,25 @@ class _PurchaseScreenState extends ConsumerState<PurchaseScreen> {
       ..paymentStatus = 'paid'
       ..createdAt = DateTime.now();
 
-    await ref.read(purchaseProvider.notifier).addPurchase(purchase);
+    final success = await ref.read(purchaseProvider.notifier).addPurchase(purchase);
     if (!mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Purchase ${_billNumber!} saved successfully!'),
-        backgroundColor: AppColors.success,
-      ),
-    );
+    if (success) {
+      ref.read(lastUpdateProvider.notifier).state = DateTime.now(); // Update stats
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Purchase ${_billNumber!} saved successfully!'),
+          backgroundColor: AppColors.success,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to save purchase. Please try again.'),
+          backgroundColor: AppColors.danger,
+        ),
+      );
+    }
 
     if (saveAndNew) {
       _partyNameController.clear();

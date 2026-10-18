@@ -8,6 +8,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/services/settings_service.dart';
 import '../../../../core/utils/india_gst.dart';
 import '../../../../core/widgets/responsive_scaffold.dart';
+import '../../../../core/database/isar_service.dart';
 
 const _countryCurrencies = {
   'India': '₹',
@@ -100,6 +101,27 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       if (file.existsSync()) file.deleteSync();
     }
     setState(() => _logoPath = '');
+  }
+
+  Future<void> _factoryReset() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Factory Reset'),
+        content: const Text('This will delete ALL data. Are you sure?'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Delete')),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      await IsarService.clearAll();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('All data deleted. Please restart the app.')));
+      }
+    }
   }
 
   void _save() {
@@ -249,6 +271,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
                     onPressed: _save,
                     child: const Text('Save Settings',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      foregroundColor: Colors.red,
+                      side: const BorderSide(color: Colors.red),
+                    ),
+                    onPressed: _factoryReset,
+                    child: const Text('Factory Reset (Delete All Data)',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold)),
                   ),

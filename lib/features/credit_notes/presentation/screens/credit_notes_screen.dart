@@ -158,15 +158,46 @@ class _NotesList extends StatelessWidget {
   }
 }
 
-class _NoteCard extends StatelessWidget {
+class _NoteCard extends ConsumerWidget {
   final CreditNote note;
   final String currency;
 
   const _NoteCard({required this.note, required this.currency});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isCredit = note.noteType == 'credit_note';
+  void deleteNote(BuildContext context, WidgetRef ref) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Delete Note'),
+        content: const Text('Are you sure you want to delete this note? This will reverse all stock and balance adjustments.'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Delete', style: TextStyle(color: AppColors.danger))),
+        ],
+      ),
+    );
+
+    if (confirm == true) {
+      await ref.read(creditNoteProvider.notifier).deleteNote(note.id);
+      if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Note deleted successfully')));
+    }
+  }
+
+  void editNote(BuildContext context) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AddCreditNoteScreen(
+            noteType: note.noteType,
+            noteToEdit: note,
+          ),
+        ),
+      );
+  }
+
     final dateFormat = DateFormat('dd MMM yyyy');
 
     return Card(
@@ -220,6 +251,15 @@ class _NoteCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: isCredit ? AppColors.success : AppColors.warning,
                     ),
+                  ),
+                  const SizedBox(width: 8),
+                  IconButton(
+                    icon: const Icon(Icons.edit, size: 20),
+                    onPressed: () => editNote(context),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete, size: 20, color: AppColors.danger),
+                    onPressed: () => deleteNote(context, ref),
                   ),
                 ],
               ),

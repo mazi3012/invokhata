@@ -5,6 +5,7 @@ import '../../../../core/database/schemas/party.dart';
 import '../../../../core/utils/gst_calculator.dart';
 import '../../../../core/services/settings_service.dart';
 import '../../../../core/utils/india_gst.dart';
+import '../../../dashboard/presentation/providers/dashboard_provider.dart';
 import '../../data/pos_repository.dart';
 
 final posRepositoryProvider = Provider((ref) => POSRepository());
@@ -101,12 +102,14 @@ class CartState {
     this.paidAmount = 0.0,
   });
 
-  double get subtotal =>
-      items.fold(0.0, (sum, cartItem) => sum + cartItem.totalTaxable);
+  double get subtotal {
+    final total = items.fold(0.0, (sum, cartItem) => sum + cartItem.totalTaxable);
+    return total.isFinite ? total : 0.0;
+  }
 
   double get totalGst {
     if (!isGstInvoice) return 0.0;
-    return items.fold(0.0, (sum, cartItem) {
+    final total = items.fold(0.0, (sum, cartItem) {
       if (!cartItem.item.isGst) return sum;
       final res = GstCalculator.calculateItemTax(
         unitPrice: cartItem.customUnitPrice,
@@ -117,15 +120,17 @@ class CartState {
       );
       return sum + res.totalGst;
     });
+    return total.isFinite ? total : 0.0;
   }
 
   double get totalCess {
     if (!isGstInvoice) return 0.0;
-    return items.fold(0.0, (sum, cartItem) {
+    final total = items.fold(0.0, (sum, cartItem) {
       if (!cartItem.item.isGst) return sum;
       final taxable = _calculate(cartItem).taxableAmount;
       return sum + CessCalculator.calculateCess(taxable, cartItem.item.cessRate);
     });
+    return total.isFinite ? total : 0.0;
   }
 
   bool get isInterState {
@@ -158,21 +163,30 @@ class CartState {
     );
   }
 
-  double get totalCgst => isGstInvoice
-      ? items.fold(0.0, (sum, item) => sum + _calculate(item).cgst)
-      : 0.0;
+  double get totalCgst {
+    if (!isGstInvoice) return 0.0;
+    final total = items.fold(0.0, (sum, item) => sum + _calculate(item).cgst);
+    return total.isFinite ? total : 0.0;
+  }
 
-  double get totalSgst => isGstInvoice
-      ? items.fold(0.0, (sum, item) => sum + _calculate(item).sgst)
-      : 0.0;
+  double get totalSgst {
+    if (!isGstInvoice) return 0.0;
+    final total = items.fold(0.0, (sum, item) => sum + _calculate(item).sgst);
+    return total.isFinite ? total : 0.0;
+  }
 
-  double get totalIgst => isGstInvoice
-      ? items.fold(0.0, (sum, item) => sum + _calculate(item).igst)
-      : 0.0;
+  double get totalIgst {
+    if (!isGstInvoice) return 0.0;
+    final total = items.fold(0.0, (sum, item) => sum + _calculate(item).igst);
+    return total.isFinite ? total : 0.0;
+  }
 
   double get amountDue => grandTotal - paidAmount;
 
-  double get grandTotal => (subtotal + totalGst + totalCess) - discountAmount;
+  double get grandTotal {
+    final total = (subtotal + totalGst + totalCess) - discountAmount;
+    return total.isFinite ? total : 0.0;
+  }
   PaymentMode get paymentModeEnum => _stringToPaymentMode(paymentMode);
 
   CartState copyWith({
@@ -205,7 +219,7 @@ class CartState {
 }
 
 final cartProvider = StateNotifierProvider<CartNotifier, CartState>((ref) {
-  return CartNotifier(ref.watch(posRepositoryProvider),
+  return CartNotifier(ref, ref.watch(posRepositoryProvider),
       ref.read(settingsProvider).businessState);
 });
 
@@ -222,10 +236,11 @@ class CheckoutWalkInPartialPaymentError extends CheckoutResult {}
 class CheckoutMalformedInputError extends CheckoutResult {}
 
 class CartNotifier extends StateNotifier<CartState> {
+  final Ref _ref;
   final POSRepository _repository;
   final String _sellerState;
 
-  CartNotifier(this._repository, this._sellerState)
+  CartNotifier(this._ref, this._repository, this._sellerState)
       : super(CartState(sellerState: _sellerState));
 
   void addItem(Item item) {
@@ -241,7 +256,8 @@ class CartNotifier extends StateNotifier<CartState> {
       }
       state = state.copyWith(items: updatedItems);
     } else {
-      final newItem = CartItem(item: item, customUnitPrice: item.salesPrice);
+      final unitPrice = item.salesPrice.isFinite ? item.salesPrice : 0.0;
+      final newItem = CartItem(item: item, customUnitPrice: unitPrice);
       state = state.copyWith(items: [...state.items, newItem]);
     }
   }
@@ -399,6 +415,7 @@ class CartNotifier extends StateNotifier<CartState> {
       partyId: state.selectedParty?.id,
     );
 
+    _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
     clearCart();
     return CheckoutSuccess(invoice);
   }

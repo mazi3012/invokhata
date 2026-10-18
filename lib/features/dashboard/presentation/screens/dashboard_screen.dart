@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/responsive_scaffold.dart';
 import '../../../inventory/presentation/providers/inventory_provider.dart';
@@ -184,18 +185,19 @@ class DashboardScreen extends ConsumerWidget {
 
                     final lineChart = _buildChartCard(
                       title: 'Sales trend',
-                      subtitle: 'Revenue over the last 14 days',
+                      subtitle: 'Daily revenue for selected month',
                       icon: Icons.show_chart_rounded,
                       color: AppColors.primary,
+                      headerAction: _buildMonthSelector(context, ref),
                       child: SizedBox(
                         height: 250,
                         child: salesOverTimeAsync.when(
                           data: (data) => data.isEmpty
                               ? _buildEmptyChart(
                                   icon: Icons.auto_graph_rounded,
-                                  title: 'No sales data yet',
+                                  title: 'No sales data for this month',
                                   message:
-                                      'Record an invoice to start seeing your daily trend.',
+                                      'Record an invoice or select another month to view trends.',
                                 )
                               : SalesLineChart(
                                   salesData: data,
@@ -459,6 +461,7 @@ class DashboardScreen extends ConsumerWidget {
     required IconData icon,
     required Color color,
     required Widget child,
+    Widget? headerAction,
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -511,10 +514,87 @@ class DashboardScreen extends ConsumerWidget {
                   ],
                 ),
               ),
+              if (headerAction != null) ...[
+                const SizedBox(width: 8),
+                headerAction,
+              ],
             ],
           ),
           const SizedBox(height: 8),
           child,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMonthSelector(BuildContext context, WidgetRef ref) {
+    final selectedMonth = ref.watch(selectedDashboardMonthProvider);
+    final formattedMonth = DateFormat('MMMM yyyy').format(selectedMonth);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          InkWell(
+            onTap: () {
+              final prevMonth =
+                  DateTime(selectedMonth.year, selectedMonth.month - 1, 1);
+              ref.read(selectedDashboardMonthProvider.notifier).state = prevMonth;
+            },
+            borderRadius: BorderRadius.circular(8),
+            child: const Padding(
+              padding: EdgeInsets.all(4),
+              child: Icon(Icons.chevron_left, size: 18, color: AppColors.primary),
+            ),
+          ),
+          InkWell(
+            onTap: () async {
+              final picked = await showDatePicker(
+                context: context,
+                initialDate: selectedMonth,
+                firstDate: DateTime(2020),
+                lastDate: DateTime.now(),
+                helpText: 'Select Month & Year',
+              );
+              if (picked != null) {
+                ref.read(selectedDashboardMonthProvider.notifier).state =
+                    DateTime(picked.year, picked.month, 1);
+              }
+            },
+            borderRadius: BorderRadius.circular(8),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              child: Text(
+                formattedMonth,
+                style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryDark,
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              final nextMonth =
+                  DateTime(selectedMonth.year, selectedMonth.month + 1, 1);
+              final now = DateTime.now();
+              if (nextMonth.isBefore(DateTime(now.year, now.month + 1, 1))) {
+                ref.read(selectedDashboardMonthProvider.notifier).state = nextMonth;
+              }
+            },
+            borderRadius: BorderRadius.circular(8),
+            child: const Padding(
+              padding: EdgeInsets.all(4),
+              child: Icon(Icons.chevron_right, size: 18, color: AppColors.primary),
+            ),
+          ),
         ],
       ),
     );
@@ -601,12 +681,10 @@ class SalesLineChart extends StatelessWidget {
     const double yAxisSteps = 4.0;
     final double yInterval = topY / yAxisSteps;
 
-    return AspectRatio(
-      aspectRatio: 1.7,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 16, bottom: 16),
-        child: LineChart(
-          LineChartData(
+    return Padding(
+      padding: const EdgeInsets.only(right: 16, bottom: 16),
+      child: LineChart(
+        LineChartData(
             gridData: FlGridData(
               show: true,
               drawVerticalLine: true,
@@ -638,7 +716,8 @@ class SalesLineChart extends StatelessWidget {
                   showTitles: true,
                   getTitlesWidget: (value, meta) {
                     final int index = value.toInt();
-                    if (index >= 0 && index < labels.length) {
+                    final int step = labels.length > 25 ? 5 : (labels.length > 15 ? 3 : 1);
+                    if (index >= 0 && index < labels.length && (index % step == 0 || index == labels.length - 1)) {
                       final String label = labels[index];
                       final parts = label.split('-');
                       if (parts.length == 3) {
@@ -751,8 +830,7 @@ class SalesLineChart extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 

@@ -2,14 +2,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import '../../../../core/database/isar_service.dart';
 import '../../../../core/database/schemas/party.dart';
+import '../../../dashboard/presentation/providers/dashboard_provider.dart';
 
 final partyProvider =
     StateNotifierProvider<PartyNotifier, AsyncValue<List<Party>>>((ref) {
-  return PartyNotifier();
+  return PartyNotifier(ref);
 });
 
 class PartyNotifier extends StateNotifier<AsyncValue<List<Party>>> {
-  PartyNotifier() : super(const AsyncValue.loading()) {
+  final Ref _ref;
+  PartyNotifier(this._ref) : super(const AsyncValue.loading()) {
     loadParties();
   }
 
@@ -41,6 +43,7 @@ class PartyNotifier extends StateNotifier<AsyncValue<List<Party>>> {
       await _isar.partys.put(party);
     });
     loadParties();
+    _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
   }
 
   Future<void> updateParty(Party party) async {
@@ -48,6 +51,7 @@ class PartyNotifier extends StateNotifier<AsyncValue<List<Party>>> {
       await _isar.partys.put(party);
     });
     loadParties();
+    _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
   }
 
   Future<void> recordDues(int partyId, double amount) async {
@@ -59,6 +63,7 @@ class PartyNotifier extends StateNotifier<AsyncValue<List<Party>>> {
       }
     });
     loadParties();
+    _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
   }
 
   Future<void> addPayment(int partyId, double amount) async {
@@ -71,6 +76,7 @@ class PartyNotifier extends StateNotifier<AsyncValue<List<Party>>> {
       }
     });
     loadParties();
+    _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
   }
 
   Future<void> deleteParty(int id) async {
@@ -78,5 +84,6 @@ class PartyNotifier extends StateNotifier<AsyncValue<List<Party>>> {
       await _isar.partys.delete(id);
     });
     loadParties();
+    _ref.read(lastUpdateProvider.notifier).state = DateTime.now();
   }
 }

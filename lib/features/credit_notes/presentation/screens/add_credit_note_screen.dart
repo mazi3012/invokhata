@@ -6,16 +6,19 @@ import '../../../../core/database/schemas/item.dart';
 import '../../../../core/database/schemas/party.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/services/settings_service.dart';
+import '../../../../core/widgets/hsn_autocomplete_field.dart';
 import '../../../inventory/presentation/providers/inventory_provider.dart';
 import '../../../khata/presentation/providers/party_provider.dart';
 import '../providers/credit_note_provider.dart';
 
 class AddCreditNoteScreen extends ConsumerStatefulWidget {
   final String noteType; // 'credit_note' or 'debit_note'
+  final CreditNote? noteToEdit;
 
   const AddCreditNoteScreen({
     super.key,
     required this.noteType,
+    this.noteToEdit,
   });
 
   @override
@@ -555,14 +558,7 @@ class _AddItemSheetState extends ConsumerState<_AddItemSheet> {
             Row(
               children: [
                 Expanded(
-                  child: TextFormField(
-                    controller: _hsnCtrl,
-                    decoration: const InputDecoration(
-                      labelText: 'HSN/SAC Code',
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                    ),
-                  ),
+                  child: HsnAutocompleteField(controller: _hsnCtrl),
                 ),
                 const SizedBox(width: 12),
                 Expanded(

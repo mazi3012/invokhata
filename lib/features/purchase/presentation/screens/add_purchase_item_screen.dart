@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/database/schemas/purchase.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_header.dart';
+import '../../../../core/widgets/hsn_autocomplete_field.dart';
 import '../../../inventory/presentation/providers/inventory_provider.dart';
 
 class AddPurchaseItemScreen extends ConsumerStatefulWidget {
@@ -315,11 +316,7 @@ class _AddPurchaseItemScreenState extends ConsumerState<AddPurchaseItemScreen> {
                       // HSN Code (optional)
                       _buildFieldLabel('HSN Code (optional)'),
                       const SizedBox(height: 6),
-                      TextField(
-                        controller: _hsnController,
-                        decoration: _inputDecoration('e.g. 21069099'),
-                        textCapitalization: TextCapitalization.characters,
-                      ),
+                      HsnAutocompleteField(controller: _hsnController, labelText: 'e.g. 21069099'),
                       const SizedBox(height: 16),
 
                       // Quantity

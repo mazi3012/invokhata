@@ -36,14 +36,14 @@ class Purchase {
   Id id = Isar.autoIncrement;
 
   @Index(unique: true, replace: false, caseSensitive: false)
-  late String billNumber;
+  String billNumber = '';
 
   @Index()
   int billSeq = 0;
 
   int? partyId;
-  late DateTime purchaseDate;
-  late String partyName;
+  DateTime purchaseDate = DateTime.now();
+  String partyName = '';
   String? partyGstin;
   String? partyAddress;
   String? partyPhone;
@@ -54,10 +54,10 @@ class Purchase {
 
   List<PurchaseLineItem> items = [];
 
-  late double subtotal;
-  late double taxAmount;
-  late double discountAmount;
-  late double grandTotal;
+  double subtotal = 0.0;
+  double taxAmount = 0.0;
+  double discountAmount = 0.0;
+  double grandTotal = 0.0;
   
   double get totalAmount => grandTotal;
   set totalAmount(double value) => grandTotal = value;

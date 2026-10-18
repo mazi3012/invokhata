@@ -21,17 +21,21 @@ class AnalyticsRepository {
 
     double totalSales = 0;
     for (var inv in invoices) {
-      totalSales += inv.grandTotal;
+      if (inv.grandTotal.isFinite) {
+        totalSales += inv.grandTotal;
+      }
     }
 
     double totalPurchase = 0;
     for (var pur in purchases) {
-      totalPurchase += pur.totalAmount;
+      if (pur.totalAmount.isFinite) {
+        totalPurchase += pur.totalAmount;
+      }
     }
 
     double totalDue = 0;
     for (var party in parties) {
-      if (party.outstandingBalance > 0) {
+      if (party.outstandingBalance.isFinite && party.outstandingBalance > 0) {
         totalDue += party.outstandingBalance;
       }
     }
@@ -51,32 +55,28 @@ class AnalyticsRepository {
     };
   }
 
-  /// Returns daily sales grouped by day for the last 14 days.
-  ///
-  /// An empty map is returned when there are no positive sales in the period so
-  /// the dashboard can render an intentional no-data state instead of trying
-  /// to plot a flat zero-value line.
-  /// Format: `{'2026-09-01': 1234.5, ...}` with keys sorted ascending.
-  Future<Map<String, double>> getSalesOverTime({int days = 14}) async {
+  /// Returns daily sales grouped by day for the specified month and year.
+  /// Format: `{'2026-10-01': 1234.5, ...}` with keys sorted ascending (all days of the month).
+  Future<Map<String, double>> getSalesForMonth(int year, int month) async {
     final invoices = await _isar.invoices.where().findAll();
-    final now = DateTime.now();
-    final cutoff = DateTime(now.year, now.month, now.day)
-        .subtract(Duration(days: days - 1));
+    final lastDay = (month < 12)
+        ? DateTime(year, month + 1, 1).subtract(const Duration(days: 1))
+        : DateTime(year + 1, 1, 1).subtract(const Duration(days: 1));
 
     final daily = <String, double>{};
-    for (var i = 0; i < days; i++) {
-      final day =
-          DateTime(now.year, now.month, now.day).subtract(Duration(days: i));
-      daily[_formatDate(day)] = 0.0;
+    for (var d = 1; d <= lastDay.day; d++) {
+      final date = DateTime(year, month, d);
+      daily[_formatDate(date)] = 0.0;
     }
 
     var hasSales = false;
     for (final inv in invoices) {
-      if (inv.invoiceDate.isBefore(cutoff)) continue;
-      final key = _formatDate(inv.invoiceDate);
-      if (daily.containsKey(key) && inv.grandTotal > 0) {
-        daily[key] = (daily[key] ?? 0) + inv.grandTotal;
-        hasSales = true;
+      if (inv.invoiceDate.year == year && inv.invoiceDate.month == month) {
+        final key = _formatDate(inv.invoiceDate);
+        if (daily.containsKey(key) && inv.grandTotal.isFinite && inv.grandTotal > 0) {
+          daily[key] = (daily[key] ?? 0) + inv.grandTotal;
+          hasSales = true;
+        }
       }
     }
 
@@ -97,8 +97,12 @@ class AnalyticsRepository {
     for (final inv in invoices) {
       for (final line in inv.items) {
         final name = line.itemName ?? 'Unknown';
-        productMap[name] = (productMap[name] ?? 0) + line.totalPrice;
-        qtyMap[name] = (qtyMap[name] ?? 0) + line.quantity;
+        if (line.totalPrice.isFinite) {
+          productMap[name] = (productMap[name] ?? 0) + line.totalPrice;
+        }
+        if (line.quantity.isFinite) {
+          qtyMap[name] = (qtyMap[name] ?? 0) + line.quantity;
+        }
       }
     }
 
@@ -118,15 +122,26 @@ class AnalyticsRepository {
       '${d.year.toString().padLeft(4, '0')}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
 }
 
+final lastUpdateProvider = StateProvider<DateTime>((ref) => DateTime.now());
+
+final selectedDashboardMonthProvider = StateProvider<DateTime>((ref) {
+  final now = DateTime.now();
+  return DateTime(now.year, now.month, 1);
+});
+
 final analyticsProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+  ref.watch(lastUpdateProvider);
   return AnalyticsRepository().getDashboardStats();
 });
 
 final salesOverTimeProvider = FutureProvider<Map<String, double>>((ref) async {
-  return AnalyticsRepository().getSalesOverTime();
+  ref.watch(lastUpdateProvider);
+  final selectedMonth = ref.watch(selectedDashboardMonthProvider);
+  return AnalyticsRepository().getSalesForMonth(selectedMonth.year, selectedMonth.month);
 });
 
 final topProductsProvider =
     FutureProvider<List<Map<String, dynamic>>>((ref) async {
+  ref.watch(lastUpdateProvider);
   return AnalyticsRepository().getTopProducts();
 });
